@@ -1,11 +1,11 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Confido Legal Docs",
   "colors": {
-    "primary": "#3182CE",
-    "light": "#63B3ED",
-    "dark": "#2B6CB0"
+    "primary": "#16A34A",
+    "light": "#07C983",
+    "dark": "#15803D"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -58,20 +58,25 @@
     "global": {
       "anchors": [
         {
-          "anchor": "GraphQL Playground",
-          "href": "https://api.gravity-legal.com",
-          "icon": "webhook"
+          "anchor": "Documentation",
+          "href": "https://mintlify.com/docs",
+          "icon": "book-open-cover"
         },
         {
           "anchor": "Community",
           "href": "https://mintlify.com/community",
           "icon": "slack"
+        },
+        {
+          "anchor": "Blog",
+          "href": "https://mintlify.com/blog",
+          "icon": "newspaper"
         }
       ]
     }
   },
   "logo": {
-    "light": "/logo/logo-light.svg",
+    "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
   },
   "navbar": {
