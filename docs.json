@@ -3,9 +3,9 @@
   "theme": "mint",
   "name": "Mint Starter Kit",
   "colors": {
-    "primary": "#0183ff",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#3182CE",
+    "light": "#63B3ED",
+    "dark": "#2B6CB0"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -58,19 +58,14 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "GraphQL Playground",
+          "href": "https://api.gravity-legal.com",
+          "icon": "webhook"
         },
         {
           "anchor": "Community",
           "href": "https://mintlify.com/community",
           "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
         }
       ]
     }
