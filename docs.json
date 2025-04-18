@@ -22,10 +22,10 @@
             ]
           },
           {
-            "group": "Essentials",
+            "group": "Firm Onboarding",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
+              "firm-onboarding/overview",
+              "firm-onboarding/connect",
               "essentials/images",
               "essentials/settings",
               "essentials/navigation",
