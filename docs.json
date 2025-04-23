@@ -3,9 +3,9 @@
   "theme": "mint",
   "name": "Confido Legal Docs",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#3182CE",
+    "light": "#63B3ED",
+    "dark": "#2B6CB0"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -14,11 +14,11 @@
         "tab": "Guides",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Overview",
             "pages": [
-              "introduction",
-              "quickstart",
-              "development"
+              "overview/introduction",
+              "overview/quickstart",
+              "overview/development"
             ]
           },
           {
@@ -26,6 +26,7 @@
             "pages": [
               "firm-onboarding/overview",
               "firm-onboarding/connect",
+              "firm-onboarding/firm-status",
               "essentials/images",
               "essentials/settings",
               "essentials/navigation",
@@ -58,25 +59,20 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "GraphQL Playground",
+          "href": "https://api.gravity-legal.com",
+          "icon": "webhook"
         },
         {
           "anchor": "Community",
           "href": "https://mintlify.com/community",
           "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
         }
       ]
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
+    "light": "/logo/confido-light.svg",
     "dark": "/logo/dark.svg"
   },
   "navbar": {
