@@ -4,9 +4,9 @@ title: Test Payment Methods
 
 ## Credit and Debit Cards
 
-| Number              | Brand            | Result                                                           | Type   | Description                                     |
-| ------------------- | ---------------- | ---------------------------------------------------------------- | ------ | ----------------------------------------------- |
-| 4242 4242 4242 4242 | Visa             | <span className='text-green-600 italic font-bold'>success</span> | Credit |
+| Number | Brand | Result | Type | Description |
+| --- | --- | --- | ------ | --- |
+| 4242 4242 4242 4242 | Visa | <span className='text-green-600 italic font-bold'>success</span> | Credit |
 | 4000 0566 5566 5556 | Visa             | <span className='text-green-600 italic font-bold'>success</span> | Debit  |
 | 3411 11111 111111   | American Express | <span className='text-green-600 italic font-bold'>success</span> | Credit |
 | 6011 0009 9013 9424 | Discover         | <span className='text-green-600 italic font-bold'>success</span> | Credit |
@@ -23,6 +23,6 @@ title: Test Payment Methods
 
 | Account Number   | Routing Number | Result                                                           | Description |
 | ---------------- | -------------- | ---------------------------------------------------------------- | ----------- |
-| ****\*\*\*\***** | ****\*****     | <span className='text-green-600 italic font-bold'>success</span> |
-| ****\*\*\*\***** | 000000000      | <span className='text-red-600 italic font-bold'>failure</span>   |
-| 0000000000       | ****\*****     | <span className='text-red-600 italic font-bold'>failure</span>   |
+| [any] | [any]     | <span className='text-green-600 italic font-bold'>success</span> |
+| [any] | 000000000      | <span className='text-red-600 italic font-bold'>failure</span>   |
+| 0000000000       | [any] | <span className='text-red-600 italic font-bold'>failure</span>   |
