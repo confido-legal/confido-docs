@@ -1,0 +1,35 @@
+---
+title: Overview
+---
+
+Statements are generated every month to outline metrics for the firm and inform the firm on the debits that will be made against their bank accounts for fees. Based on your desired functionality, we have two methods for giving your firms their statement data.
+
+### Creating your own statement
+
+All statement data is accessible through our GraphQL API. The Statement object has everything you would need to build a customized statement for the firm branded to your own application.
+
+The `bankAccounts` field on the statement object outlines the fees associated with each of the firms individual bank accounts. If a firm has surcharging enabled, the `surchargeFeesCollected` can be subtracted from the `cardFees` field to determine the firms actual `netFees`. The fees are broken up in this manner because surcharging fees are deposited into the firm's bank account at the time of the payment and then taken out at the end of the month.
+
+The `debits` field on the statement object outlines the debits that will be taken out of the firms fee bank account.
+
+The `additionalCredits` and `additionalDebits` fields are catch all locations for any additional changes that occured (fee waivers, chargeback reversals, etc).
+
+### Utilizing the Confido Legal PDF
+
+You can also query the GraphQL API for the `statement.pdfUrl` field. This is a short term url that can be used to either download the pdf or display the statement in a UI.
+
+<div className="italic text-orange-400">
+    Warning: The pdfUrl should not be sent out through an email because it is a short lived link. If you would like to
+    send the pdf through an email, the pdf should be downloaded with the pdfUrl and added as an attachment to the email.
+</div>
+
+### Webhooks
+
+View the `statement.created` and `statement.updated` webhooks [here](/docs/webhooks/types).
+
+### Sandbox environment
+
+We have exposed two GraphQL Mutations to help with testing the statements process.
+
+-   `sandboxOnlyCreateMockStatement` This mutation can be used to generate an example statement for a specific month. The values in the statement will be completely random and will not relate to the firm's actual sandbox payments. This will also trigger the `statement.created` webhook so you can test that flow as well.
+-   `sandboxOnlyUpdateMockStatement` This mutation will update a specific statement with new random values. This will also trigger the `statement.updated` webhook so you test that flow as well.

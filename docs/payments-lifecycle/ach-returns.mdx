@@ -1,0 +1,11 @@
+---
+title: ACH Returns
+---
+
+Sometimes ACH payments get returned after they have been settled. When this happens the funds, that may have already hit the Firm's bank account, are reversed. Partially returns do not exist.
+
+You can get notified when an ACH payment is returned by configuring the `transaction.ach_returned` webhook. See [webhooks](/docs/webhooks/overview) for more info.
+
+### Testing
+
+To test ACH returns, you can call the `sandboxOnlyTriggerAchReturn` on a Transaction with `type: achPayment`. This will simulate an `Insufficient Funds` return error code and send out a webhook.

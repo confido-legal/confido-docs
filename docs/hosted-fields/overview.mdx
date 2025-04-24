@@ -1,0 +1,30 @@
+---
+title: Overview
+---
+
+With Hosted Fields, you get complete control over the payment experience for your users but stay out of PCI scope. You can accept payments directly from your application and have 100% control over the branding and user experience.
+
+This control does come with some trade-offs:
+
+-   You will have to write more code when compared to using our payment pages.
+-   You will need to handle each payment method and keep your implementation up to date as we release new payment methods. eg: By Now, Pay Later, Apple Pay, Crypto
+
+With Hosted Fields, you add `div`s to your page with unique `id`s and the Confido Legal SDK will inject iframes there to collect sensitive data, keeping your code out of PCI scope.
+
+Using Hosted Fields does require more development work on your end. We encourage all our partners to at least consider our [hosted payment pages](/docs/payment-pages/using-in-an-iframe) before making the decision to integrate with Hosted Fields. That being said, if Hosted Fields is right for you, we've made every attempt to make the developer experience as delightful as possible.
+
+Here are the high level steps:
+
+![image](https://res.cloudinary.com/dj1jjaxaf/image/upload/v1686313058/hosted-fields-sequence-diagram_fksthx.png)
+
+1. Start a Payment Session from your server by calling the `paymentSessionCreate`
+   or `createSavePaymentMethodToken` mutation.
+2. Pass the Public Token to your frontend.
+3. Add elements on the page where you want the fields injected.
+4. Load the Confido Legal Hosted Fields SDK.
+5. Initialize the SDK with the Token.
+6. _iFrames are injected by SDK._
+7. _User fills out the form._
+8. When user has finished and indicates they are ready to pay (usually by clicking a button) call the `sdk.submitFields()` function. This sends the sensitive field data directly to our servers.
+9. After successfully submitting the sensitive data, pass additional non-sensitive data to your server and complete the payment from your backend by calling the `paymentSessionComplete` or `completeSavePaymentMethod` mutation.
+10. Record the result and display it to your user.

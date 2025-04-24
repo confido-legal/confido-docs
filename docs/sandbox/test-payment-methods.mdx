@@ -1,0 +1,28 @@
+---
+title: Test Payment Methods
+---
+
+## Credit and Debit Cards
+
+| Number              | Brand            | Result                                                           | Type   | Description                                     |
+| ------------------- | ---------------- | ---------------------------------------------------------------- | ------ | ----------------------------------------------- |
+| 4242 4242 4242 4242 | Visa             | <span className='text-green-600 italic font-bold'>success</span> | Credit |
+| 4000 0566 5566 5556 | Visa             | <span className='text-green-600 italic font-bold'>success</span> | Debit  |
+| 3411 11111 111111   | American Express | <span className='text-green-600 italic font-bold'>success</span> | Credit |
+| 6011 0009 9013 9424 | Discover         | <span className='text-green-600 italic font-bold'>success</span> | Credit |
+| 3530 1113 3330 0000 | JCB              | <span className='text-green-600 italic font-bold'>success</span> | Credit |
+| 2720 9974 6560 4033 | Mastercard       | <span className='text-green-600 italic font-bold'>success</span> | Credit | Takes at least 45 seconds to return             |
+| 4000 3000 1111 2220 | Visa             | <span className='text-red-600 italic font-bold'>failure</span>   | Credit |
+| 5334 3542 1767 1459 | Visa             | <span className='text-red-600 italic font-bold'>failure</span>   | Credit | Causes a field error on the `card-number` field |
+| 4000 1013 1111 2229 | Visa             | <span className='text-red-600 italic font-bold'>failure</span>   | Credit | Takes at least 45 seconds to fail               |
+| 4000 1000 0000 0000 | Visa             | <span className='text-red-600 italic font-bold'>failure</span>   | Credit | Fails when amount is over $100.00               |
+| 5555 4444 3333 2226 | Mastercard       | <span className='text-red-600 italic font-bold'>failure</span>   | Debit  | Fails when amount is over $100.00               |
+| 4005 5717 0222 2222 | Visa             | <span className='text-red-600 italic font-bold'>failure</span>   | Credit | Fails on a tokenized payment                    |
+
+## ACH
+
+| Account Number   | Routing Number | Result                                                           | Description |
+| ---------------- | -------------- | ---------------------------------------------------------------- | ----------- |
+| ****\*\*\*\***** | ****\*****     | <span className='text-green-600 italic font-bold'>success</span> |
+| ****\*\*\*\***** | 000000000      | <span className='text-red-600 italic font-bold'>failure</span>   |
+| 0000000000       | ****\*****     | <span className='text-red-600 italic font-bold'>failure</span>   |

@@ -1,0 +1,15 @@
+---
+title: API Limits & Throttling
+includeTOC: true
+---
+
+To ensure optimal performance and fair usage, we enforce the following usage limits and throttling policies.
+
+### Usage limits
+
+-   **500 requests per minute** _(per firmId or partnerId)_
+-   **10 concurrent requests** _(per firmId or partnerId)_
+
+### Throttling
+
+Requests made beyond the limits mentioned above will result in a `429 Too Many Requests` response. When this happens wait for 60 seconds and try again.

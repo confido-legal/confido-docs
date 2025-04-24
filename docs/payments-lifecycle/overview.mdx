@@ -1,0 +1,29 @@
+---
+title: Overview
+---
+
+Confido Transaction Status Flow Diagram
+
+<img src="https://res.cloudinary.com/djp21wtxm/image/upload/v1714947603/i1274x298-apWI8Osk5R9K_lqiota.png" alt="" />
+
+## Statuses
+
+`PENDING` -> The transaction was successfully authorized and has been added to the current batch to be processed. No funds have been moved yet.
+
+`FUNDS_IN_TRANSIT` -> The transaction has been batched and is in the process of getting deposited into the firms bank account. The amount of time the transaction is in the funds in transit status is based on the type of transaction.
+
+`DEPOSITED` -> The transaction has been deposited into the firms bank account.
+
+`VOIDED` -> An authorized transaction was voided. This means it was pulled out of the batch and will not be processed. No funds will be transferred.
+
+`RETURNED` -> The transaction, which was previously either FUNDS_IN_TRANSIT or DEPOSITED was returned. This can only occur with ACH transactions.
+
+`REFUNDED` -> The transaction was fully refunded.
+
+`PARTIALLY_REFUNDED` -> The transaction was partially refunded.
+
+`ERROR` -> The transaction was not authorized successfully. No funds will move and this is the final status for the transaction. Error transactions can be helpful to look at while debugging issues clients are having while paying.
+
+## Webhooks
+
+The webhooks that are triggered when the transaction status changes can be found [here](/docs/webhooks/types).

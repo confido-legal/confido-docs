@@ -1,0 +1,39 @@
+---
+title: Create a Public Token
+---
+
+import { Note } from "@components/ui/note";
+
+To get started, you will need to create a public token from your server. You will then pass this token to your frontend to initialize the SDK.
+
+## Payment Sessions
+
+Create a Payment Session Token when you want to accept money now.
+
+You can pass a `bankAccountId` to this mutation which determines which of the Firm's Bank Accounts the money will be directed to. If you do not pass a `bankAccountId` the Firm's default operating account will be used.
+
+```graphql
+mutation PaymentSessionCreate($input: PaymentSessionCreateInput) {
+    paymentSessionCreate(input: $input) {
+        paymentSessionToken
+    }
+}
+```
+
+## Save Payment Method Session
+
+Create a Save Payment Method Session Token when you want to save the payment details now, then use them to make a payment at a later date. You can optionally pass in a `clientId` if you know which Client this Payment Method should be saved under.
+
+```graphql
+mutation StartSavePaymentMethodSession($input: CreateSavePaymentMethodTokenInput) {
+    createSavePaymentMethodToken(input: $input) {
+        savePaymentMethodToken
+    }
+}
+```
+
+<Note type="info">
+    You'll need to add the Firm API Token as the `x-api-key` header for the request. `x-api-key=f_secret_env_******`
+</Note>
+
+Return the `paymentToken` to your frontend to initialize the sdk.

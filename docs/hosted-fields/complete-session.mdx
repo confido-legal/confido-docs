@@ -1,0 +1,99 @@
+---
+title: Complete the Session
+---
+
+Once the user has entered all their payment information, you are ready to submit the fields and complete the session. This is typically done in a button's `onClick` handler or a form's `onSubmit` handler.
+
+To submit the sensitive data in the fields to Confido Legal, use the `submitFields()` method.
+
+For a more detailed explanation of the `submitFields()` method, see the [Reference Docs](/reference/hosted-fields-js/submit-fields).
+
+```javascript
+window.gravityLegal.submitFields(async (err) => {
+    if (err) {
+        // There was an error with submitting the field
+        // data. We should pause here, and let the user
+        // fix the issue.
+        return;
+    }
+
+    // Field data was submitted successfully.
+    // Now we can finish off the payment from
+    // our backend.
+    const otherFormData = gatherOtherFormData();
+
+    const result = await fetch("/my-api/payment-session-complete", {
+        method: "post",
+        body: JSON.stringify({
+            paymentToken,
+            ...otherFormData,
+        }),
+    });
+
+    // The result from your backend
+    console.log(result);
+});
+```
+
+You are now ready to finish the session from your server. You'll need to setup an API endpoint where you can send the token and any additional non-sensitive data that was collected in the form.
+
+## Payment Session
+
+Call the `paymentSessionComplete` mutation from your server when you are using a Payment Session to collect money. This is where you can set the amount to be paid and additional information.
+
+```graphql
+mutation PaymentSessionComplete($input: PaymentSessionCompleteInput!) {
+    paymentSessionComplete(input: $input) {
+        status
+        transactions {
+            amountProcessed
+        }
+    }
+}
+```
+
+Example mutation variables.
+
+```typescript
+const variables = {
+    input: {
+        amount: 1500, // amount in cents
+        payerEmail,
+        paymentMethod, // sent from the browser, can be found on the Hosted Fields SDK state
+        paymentToken, // the same paymentToken you used to init the fields
+    },
+};
+```
+
+## Save Payment Method Session
+
+Call the `completeSavePaymentMethod` mutation from your server when you are saving a payment method for later use.
+
+```graphql
+mutation CompleteSavePaymentMethod($input: CompleteSavePaymentMethodSessionInput!) {
+    completeSavePaymentMethod(input: $input) {
+        paymentMethod
+        payerName
+        id
+        lastFour
+        status
+        type
+    }
+}
+```
+
+Example variables
+
+```typescript
+const variables = {
+    input: {
+        payerEmail,
+        payerName,
+        payerZip,
+        paymentMethod, // sent from the browser
+        savePaymentMethodToken, // the same token you used to init the fields
+    },
+};
+```
+
+Now you can use the `initiateSPMPayment` mutation at any time to collect a payment using this payment method.

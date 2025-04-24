@@ -11,23 +11,78 @@
     "navigation": {
         "tabs": [
             {
-                "tab": "Guides",
+                "tab": "Docs",
                 "groups": [
                     {
-                        "group": "Overview",
-                        "pages": ["overview/introduction", "overview/quickstart", "overview/development"]
+                        "group": "Introduction",
+                        "pages": [
+                            "docs/introduction/overview",
+                            "docs/introduction/sandbox-environment",
+                            "docs/introduction/authorization",
+                            "docs/introduction/api-limits"
+                        ]
                     },
                     {
                         "group": "Firm Onboarding",
                         "pages": [
-                            "firm-onboarding/overview",
-                            "firm-onboarding/connect",
-                            "firm-onboarding/firm-status",
-                            "essentials/images",
-                            "essentials/settings",
-                            "essentials/navigation",
-                            "essentials/reusable-snippets"
+                            "docs/firm-onboarding/overview",
+                            "docs/firm-onboarding/connect",
+                            "docs/firm-onboarding/sign-up-links",
+                            "docs/firm-onboarding/firm-status"
                         ]
+                    },
+                    {
+                        "group": "Recieve Money",
+                        "pages": [
+                            "docs/recieve-money/payment-links",
+                            "docs/recieve-money/aggregate-payment-links",
+                            "docs/recieve-money/stored-payment-methods",
+                            "docs/recieve-money/subscriptions",
+                            "docs/recieve-money/payment-intents"
+                        ]
+                    },
+                    {
+                        "group": "Send Money (Disbursements)",
+                        "pages": ["docs/send-money/disbursements", "docs/send-money/expiration"]
+                    },
+                    {
+                        "group": "Payment Methods",
+                        "pages": [
+                            "docs/payment-methods/credit-debit-card",
+                            "docs/payment-methods/same-day-ach",
+                            "docs/payment-methods/manual-payments"
+                        ]
+                    },
+                    {
+                        "group": "Payments Lifecycle",
+                        "pages": [
+                            "docs/payments-lifecycle/overview",
+                            "docs/payments-lifecycle/voids-and-refunds",
+                            "docs/payments-lifecycle/ach-returns"
+                        ]
+                    },
+                    {
+                        "group": "Hosted Fields",
+                        "pages": [
+                            "docs/hosted-fields/overview",
+                            "docs/hosted-fields/trusted-domains",
+                            "docs/hosted-fields/create-public-token",
+                            "docs/hosted-fields/listen-for-changes",
+                            "docs/hosted-fields/initialize-sdk",
+                            "docs/hosted-fields/complete-session"
+                        ]
+                    },
+                    {
+                        "group": "Statements",
+                        "pages": ["docs/statements/overview"]
+                    },
+                    {
+                        "group": "Webhooks",
+                        "pages": ["docs/webhooks/overview", "docs/webhooks/webhook-types"]
+                    },
+                    {
+                        "group": "Sandbox",
+                        "pages": ["docs/sandbox/test-payment-methods"]
                     }
                 ]
             },
@@ -56,11 +111,6 @@
                     "anchor": "GraphQL Playground",
                     "href": "https://api.gravity-legal.com",
                     "icon": "webhook"
-                },
-                {
-                    "anchor": "Community",
-                    "href": "https://mintlify.com/community",
-                    "icon": "slack"
                 }
             ]
         }

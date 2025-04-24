@@ -1,0 +1,43 @@
+---
+title: Stored Payment Methods
+---
+
+import { ObjectDoc } from "@components/ui/objectdoc";
+
+### Overview
+
+This payment vehicle, sometimes shortend to SPM, is used to save any of the Payment Methods to be charged at a later date. This vehicle is great for scenarios in which firms charge the same client multiple times, for example on subscription legal services plans, payment plans or auto-pay.
+
+### Creation
+
+There are two ways a stored payment method can be created.
+
+-   Collect the Payment Method information directly from a hosted Stored Payment Method link
+-   Save the payment method used on a different payment vehicle, such as <a href="https://docs.confidolegal.com/docs/payment-vehicles/payment-links">Payment Links</a>
+
+### Declines
+
+When a decline occurs on a charge towards a Stored Payment Method, the `status` of the SPM changes to `payment_failed` and the SPM will not allow more payments until the SPM is reactivated.
+
+The ability to reactivate a SPM is based on the reason for the decline. For example, if the decline message is _Insufficient Funds_, the SPM can be reactivated using the `reactivateStoredPaymentMethod` mutation. You can determine if a SPM can be reativated with the `canReactivate` property. You can also grab information about the decline to display to the firm with the `declineInfo` property. This can help the firm identify possible fixes before attempting to charge the SPM again.
+
+One example of an SPM failing without being able to reactivate would be if the `declineInfo.declineMessage` was _Invalid account number_. This could occur if the client mistyped their account number when saving their ACH information. In this state, it may make sense to deactivate the SPM using the `decativateStoredPaymentMethod` mutation.
+
+---
+
+For more details on Stored Payment Methods, see these knowledge articles
+
+<ul>
+    <li>
+        <a href="https://confidolegal.com/knowledgebase/what-is-a-stored-payment-method">
+            {" "}
+            What is a Stored Payment Method?
+        </a>{" "}
+    </li>
+    <li>
+        <a href="https://confidolegal.com/knowledgebase/how-do-i-create-stored-payment-methods">
+            {" "}
+            Creating a Stored Payment Method
+        </a>
+    </li>
+</ul>
