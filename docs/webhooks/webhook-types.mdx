@@ -5,519 +5,273 @@ noTOC: true
 
 Make sure you configure Confido to send the webhook types you are interested in through the Partner Portal under `Settings > Webhooks`.
 
-import { ObjectDoc } from "@components/ui/objectdoc"
+## disbursement.updated
 
-export function generateEventDef(name, description, dataDef) {
-  const def = {
-    name,
-    description,
-    openHeaderText: 'Close Payload',
-    closedHeaderText: 'Open Payload Properties',
-    fields: [
-      dataDef,
-      {
-        name: "eventId",
-        description: "Unique id for the event. You can use this to make sure you only process a certain event once.",
-        type: "string",
-      },
-      {
-        name: "firmId",
-        description: "ID of the Firm that the event belongs to.",
-        type: "string",
-      },
-      {
-        name: "type",
-        description: "",
-        type: name,
-      }
-    ]
-  };
+Sent when a disbursement is updated.
 
-return def;
+```json
+{
+  "data": {
+    "disbursement": {
+      "id": "string",
+      "allowedMethods": "DisbursementMethod[]",
+      "amount": "int",
+      "authorizedIdentities": "array[]",
+      "clientId": "string",
+      "fundingAccountId": "string",
+      "matterId": "string",
+      "metadata": "object",
+      "publicKey": "string",
+      "status": "DisbursementStatus"
+    },
+    "oldDisbursement": {
+      "id": "string",
+      "allowedMethods": "DisbursementMethod[]",
+      "amount": "int",
+      "authorizedIdentities": "array[]",
+      "clientId": "string",
+      "fundingAccountId": "string",
+      "matterId": "string",
+      "metadata": "object",
+      "publicKey": "string",
+      "status": "DisbursementStatus"
+    }
+  },
+  "type": "disbursement.updated",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
 }
+```
 
-## Disbursements
+## firm.updated
 
-export const disbursementUpdatedDef = generateEventDef("disbursement.updated", "Sent when a disbursement is updated.", {
-    name: "data",
-    type: "object",
-    fields: [
-        {
-            name: "disbursement",
-            description:
-                "Object with the disbursements properties that changed. Make a get query if you need more properties.",
-            type: "object",
-            fields: [
-                {
-                    name: "id",
-                    description:
-                        "The uuid of the Disbursement. Use this in a follow up call to get the current status.",
-                    type: "string",
-                },
-                {
-                    name: "allowedMethods",
-                    type: "DisbursementMethod[]",
-                },
-                {
-                    name: "amount",
-                    type: "int",
-                },
-                {
-                    name: "authorizedIdentities",
-                    type: "array[]",
-                },
-                {
-                    name: "clientId",
-                    type: "string",
-                },
-                {
-                    name: "fundingAccountId",
-                    type: "string",
-                },
-                {
-                    name: "matterId",
-                    type: "string",
-                },
-                {
-                    name: "metadata",
-                    type: "object",
-                },
-                {
-                    name: "publicKey",
-                    type: "string",
-                },
-                {
-                    name: "status",
-                    type: "DisbursementStatus",
-                },
-            ],
-        },
-        {
-            name: "oldDisbursement",
-            description: "Object with the old property values for the disbursement.",
-            fields: [
-                {
-                    name: "id",
-                    description:
-                        "The uuid of the Disbursement. Use this in a follow up call to get the current status.",
-                    type: "string",
-                },
-                {
-                    name: "allowedMethods",
-                    type: "DisbursementMethod[]",
-                },
-                {
-                    name: "amount",
-                    type: "int",
-                },
-                {
-                    name: "authorizedIdentities",
-                    type: "array[]",
-                },
-                {
-                    name: "clientId",
-                    type: "string",
-                },
-                {
-                    name: "fundingAccountId",
-                    type: "string",
-                },
-                {
-                    name: "matterId",
-                    type: "string",
-                },
-                {
-                    name: "metadata",
-                    type: "object",
-                },
-                {
-                    name: "publicKey",
-                    type: "string",
-                },
-                {
-                    name: "status",
-                    type: "DisbursementStatus",
-                },
-            ],
-        },
-    ],
-});
+Sent when a firm is updated. This includes when the Firm's status changes.
 
-<ObjectDoc objectDefinition={disbursementUpdatedDef} />
-
-## Firms
-
-export const firmUpdatedDef = generateEventDef(
-    "firm.updated",
-    "Sent when a firm is updated. This includes when the Firm's status changes.",
-    {
-        name: "data",
-        type: "object",
-        fields: [
-            {
-                name: "firm",
-                description: "Firm fields",
-                type: "object",
-                fields: [
-                    {
-                        name: "id",
-                        description: "The uuid of the Firm.",
-                        type: "string",
-                    },
-                ],
-            },
-        ],
+```json
+{
+  "data": {
+    "firm": {
+      "id": "string"
     }
-);
+  },
+  "type": "firm.updated",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
+}
+```
 
-<ObjectDoc objectDefinition={firmUpdatedDef} />
+## statement.created
 
-## Statements
+Emitted when a statement has been created.
 
-export const statementCreatedDef = generateEventDef("statement.created", "Emitted when a statement has been created.", {
-    name: "data",
-    type: "object",
-    fields: [
-        {
-            name: "statement",
-            description: "Statement fields",
-            type: "object",
-            fields: [
-                {
-                    name: "id",
-                    description: "The uuid of the Statement.",
-                    type: "string",
-                },
-            ],
-        },
-    ],
-});
-
-<ObjectDoc objectDefinition={statementCreatedDef} />
-
-export const statementUpdatedDef = generateEventDef(
-    "statement.updated",
-    "Emitted if a statement is updated. It is very unlikely this will be emitted. All statements should be finalized when the `statement.created` webhook is emitted.",
-    {
-        name: "data",
-        type: "object",
-        fields: [
-            {
-                name: "statement",
-                description: "Statement fields",
-                type: "object",
-                fields: [
-                    {
-                        name: "id",
-                        description: "The uuid of the Statement.",
-                        type: "string",
-                    },
-                ],
-            },
-        ],
+```json
+{
+  "data": {
+    "statement": {
+      "id": "string"
     }
-);
+  },
+  "type": "statement.created",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
+}
+```
 
-<ObjectDoc objectDefinition={statementUpdatedDef} />
+## statement.updated
 
-## Stored Payment Methods
+Emitted if a statement is updated. It is very unlikely this will be emitted. All statements should be finalized when the `statement.created` webhook is emitted.
 
-export const spmCreatedDef = generateEventDef(
-    "stored_payment_method.created",
-    "Emitted when a new Stored Payment Method is created.",
-    {
-        name: "data",
-        type: "object",
-        fields: [
-            {
-                name: "storedPaymentMethod",
-                description: "Stored Payment Method fields",
-                type: "object",
-                fields: [
-                    {
-                        name: "id",
-                        description: "The uuid of the Stored Payment Method.",
-                        type: "string",
-                    },
-                ],
-            },
-        ],
+```json
+{
+  "data": {
+    "statement": {
+      "id": "string"
     }
-);
+  },
+  "type": "statement.updated",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
+}
+```
 
-export const spmDeletedDef = generateEventDef(
-    "stored_payment_method.deleted",
-    "Emitted when a Stored Payment Method is deleted.",
-    {
-        name: "data",
-        type: "object",
-        fields: [
-            {
-                name: "storedPaymentMethod",
-                description: "Stored Payment Method fields",
-                type: "object",
-                fields: [
-                    {
-                        name: "id",
-                        description: "The uuid of the Stored Payment Method.",
-                        type: "string",
-                    },
-                ],
-            },
-        ],
+## stored_payment_method.created
+
+Emitted when a new Stored Payment Method is created.
+
+```json
+{
+  "data": {
+    "storedPaymentMethod": {
+      "id": "string"
     }
-);
-export const spmUpdatedDef = generateEventDef(
-    "stored_payment_method.updated",
-    "Emitted when a Stored Payment Method is updated.",
-    {
-        name: "data",
-        type: "object",
-        fields: [
-            {
-                name: "storedPaymentMethod",
-                description: "Stored Payment Method fields",
-                type: "object",
-                fields: [
-                    {
-                        name: "id",
-                        description: "The uuid of the Stored Payment Method.",
-                        type: "string",
-                    },
-                ],
-            },
-        ],
+  },
+  "type": "stored_payment_method.created",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
+}
+```
+
+## stored_payment_method.deleted
+
+Emitted when a Stored Payment Method is deleted.
+
+```json
+{
+  "data": {
+    "storedPaymentMethod": {
+      "id": "string"
     }
-);
+  },
+  "type": "stored_payment_method.deleted",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
+}
+```
 
-<ObjectDoc objectDefinition={spmCreatedDef} />
-<ObjectDoc objectDefinition={spmDeletedDef} />
-<ObjectDoc objectDefinition={spmUpdatedDef} />
+## stored_payment_method.updated
 
-## Transactions
+Emitted when a Stored Payment Method is updated.
 
-export const transactionCreatedDef = generateEventDef(
-    "transaction.created",
-    "Sent when a new Transaction is created.",
-    {
-        name: "data",
-        description: "Identifying information for the Transaction",
-        type: "object",
-        fields: [
-            {
-                name: "transaction",
-                description: "",
-                type: "object",
-                fields: [
-                    {
-                        name: "id",
-                        description: "The uuid of the Transaction.",
-                        type: "string",
-                    },
-                ],
-            },
-        ],
+```json
+{
+  "data": {
+    "storedPaymentMethod": {
+      "id": "string"
     }
-);
+  },
+  "type": "stored_payment_method.updated",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
+}
+```
 
-export const transactionFundsInTransitDef = generateEventDef(
-    "transaction.funds_in_transit",
-    "Sent when a Transaction moves to FUNDS_IN_TRANSIT.",
-    {
-        name: "data",
-        description: "Indentifying information for the Transaction.",
-        type: "object",
-        fields: [
-            {
-                name: "transaction",
-                description: "",
-                type: "object",
-                fields: [
-                    {
-                        name: "id",
-                        description: "The uuid of the Transaction.",
-                        type: "string",
-                    },
-                ],
-            },
-        ],
+## transaction.created
+
+Sent when a new Transaction is created.
+
+```json
+{
+  "data": {
+    "transaction": {
+      "id": "string"
     }
-);
+  },
+  "type": "transaction.created",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
+}
+```
 
-export const transactionDepositedDef = generateEventDef(
-    "transaction.deposited",
-    "Sent when a Transaction is deposited in the firm bank account.",
-    {
-        name: "data",
-        description: "Identifying information for the Transaction.",
-        type: "object",
-        fields: [
-            {
-                name: "transaction",
-                description: "",
-                type: "object",
-                fields: [
-                    {
-                        name: "id",
-                        description: "The uuid of the Transaction.",
-                        type: "string",
-                    },
-                ],
-            },
-        ],
+## transaction.funds_in_transit
+
+Sent when a Transaction moves to FUNDS_IN_TRANSIT.
+
+```json
+{
+  "data": {
+    "transaction": {
+      "id": "string"
     }
-);
+  },
+  "type": "transaction.funds_in_transit",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
+}
+```
 
-export const transactionVoidedDef = generateEventDef("transaction.voided", "Sent when a Transaction is voided.", {
-    name: "data",
-    description: "Identifying information for the void.",
-    type: "object",
-    fields: [
-        {
-            name: "originalTransaction",
-            description:
-                "The original transaction that was voided. The status of this transaction has been updated to VOIDED",
-            type: "object",
-            fields: [
-                {
-                    name: "id",
-                    description: "The uuid of the Transaction.",
-                    type: "string",
-                },
-            ],
-        },
-        {
-            name: "voidTransaction",
-            description:
-                "The transaction that was created to track the void. This is a new transaction that was created.",
-            type: "object",
-            fields: [
-                {
-                    name: "id",
-                    description: "The uuid of the Transaction.",
-                    type: "string",
-                },
-            ],
-        },
-    ],
-});
+## transaction.deposited
 
-export const transactionRefundedDef = generateEventDef(
-    "transaction.refunded",
-    "Sent when a Transaction is fully refunded.",
-    {
-        name: "data",
-        description: "Identifying information for the refund.",
-        type: "object",
-        fields: [
-            {
-                name: "originalTransaction",
-                description:
-                    "The original transaction that was fully refunded. The status of this transaction has been updated to REFUNDED",
-                type: "object",
-                fields: [
-                    {
-                        name: "id",
-                        description: "The uuid of the Transaction.",
-                        type: "string",
-                    },
-                ],
-            },
-            {
-                name: "refundTransaction",
-                description:
-                    "The transaction that was created to track the refund. This is a new transaction that was created.",
-                type: "object",
-                fields: [
-                    {
-                        name: "id",
-                        description: "The uuid of the Transaction.",
-                        type: "string",
-                    },
-                ],
-            },
-        ],
+Sent when a Transaction is deposited in the firm bank account.
+
+```json
+{
+  "data": {
+    "transaction": {
+      "id": "string"
     }
-);
+  },
+  "type": "transaction.deposited",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
+}
+```
 
-export const transactionPartiallyRefundedDef = generateEventDef(
-    "transaction.partially_refunded",
-    "Sent when a Transaction is partially refunded.",
-    {
-        name: "data",
-        description: "Identifying information for the partial refund.",
-        type: "object",
-        fields: [
-            {
-                name: "originalTransaction",
-                description:
-                    "The original transaction that was partially refunded. The status of this transaction has been updated to PARTIALLY_REFUNDED",
-                type: "object",
-                fields: [
-                    {
-                        name: "id",
-                        description: "The uuid of the Transaction.",
-                        type: "string",
-                    },
-                ],
-            },
-            {
-                name: "refundTransaction",
-                description:
-                    "The transaction that was created to track the partial refund. This is a new transaction that was created.",
-                type: "object",
-                fields: [
-                    {
-                        name: "id",
-                        description: "The uuid of the Transaction.",
-                        type: "string",
-                    },
-                ],
-            },
-        ],
+## transaction.voided
+
+Sent when a Transaction is voided.
+
+```json
+{
+  "data": {
+    "originalTransaction": {
+      "id": "string"
+    },
+    "voidTransaction": {
+      "id": "string"
     }
-);
+  },
+  "type": "transaction.voided",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
+}
+```
 
-export const transactionAchReturnedDef = generateEventDef(
-    "transaction.ach_returned",
-    "Sent when an ACH Transaction is returned.",
-    {
-        name: "data",
-        description: "Identifying information for the Transaction",
-        type: "object",
-        fields: [
-            {
-                name: "originalTransaction",
-                description: "The original ach payment transaction that got returned.",
-                type: "object",
-                fields: [
-                    {
-                        name: "id",
-                        description: "The uuid of the Transaction.",
-                        type: "string",
-                    },
-                ],
-            },
-            {
-                name: "returnTransaction",
-                description: "The new ach return transaction that was created as a result of the return.",
-                type: "object",
-                fields: [
-                    {
-                        name: "id",
-                        description: "The uuid of the Transaction.",
-                        type: "string",
-                    },
-                ],
-            },
-        ],
+## transaction.refunded
+
+Sent when a Transaction is fully refunded.
+
+```json
+{
+  "data": {
+    "originalTransaction": {
+      "id": "string"
+    },
+    "refundTransaction": {
+      "id": "string"
     }
-);
+  },
+  "type": "transaction.refunded",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
+}
+```
 
-<ObjectDoc objectDefinition={transactionCreatedDef} />
-<ObjectDoc objectDefinition={transactionFundsInTransitDef} />
-<ObjectDoc objectDefinition={transactionDepositedDef} />
-<ObjectDoc objectDefinition={transactionVoidedDef} />
-<ObjectDoc objectDefinition={transactionRefundedDef} />
-<ObjectDoc objectDefinition={transactionPartiallyRefundedDef} />
-<ObjectDoc objectDefinition={transactionAchReturnedDef} />
+## transaction.partially_refunded
+
+Sent when a Transaction is partially refunded.
+
+```json
+{
+  "data": {
+    "originalTransaction": {
+      "id": "string"
+    },
+    "refundTransaction": {
+      "id": "string"
+    }
+  },
+  "type": "transaction.partially_refunded",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
+}
+```
+
+## transaction.ach_returned
+
+Sent when an ACH Transaction is returned.
+
+```json
+{
+  "data": {
+    "originalTransaction": {
+      "id": "string"
+    },
+    "returnTransaction": {
+      "id": "string"
+    }
+  },
+  "type": "transaction.ach_returned",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
+}
+```

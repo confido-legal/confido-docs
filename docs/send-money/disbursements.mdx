@@ -1,5 +1,168 @@
----
-title: Disbursements
----
+Securely send money to clients with Disbursements. Here's the high level overview.
 
-Securely send money to clients with Disbursements.
+1. Create a disbursement link and specify the email or phone number that can access the link
+2. Send the link to the client
+3. Client unlocks link by verifying ownership of email or phone 1. Client enters account information
+4. Funds are sent from the Firm's bank account to the client's account
+
+## The Disbursement Object
+
+For complete details of all available fields, see the Disbursement Object in our [GraphQL Playground](https://api.sandbox.gravity-legal.com/).
+
+```typescript
+type Disbursement = {
+  allowedMethods: DisbursementMethod[];
+  amount: Int;
+  authorizedIdentities: Identity[];
+  client?: Client;
+  fundingAccount: BankAccount;
+  id: string;
+  matter?: Matter;
+  metadata?: JSON;
+  status: DisbursementStatus;
+  url?: string;
+}
+
+```
+
+**allowedMethods: DisbursementMethod\[\]**
+
+A list of methods that the client is allowed to use when accepting the disbursement from the payout page. The allowed methods will fallback to the Firm’s defaults unless set specifically on the disbursement.
+
+`DisbursementMethod.ACH` Slow ACH transaction via Plaid or manually entering account number and routing number.
+
+`DisbursementMethod.PUSH_TO_CARD` Instant transaction to a Visa or Mastercard debit card.
+
+`DisbursementMethod.REQUEST_CHECK` Firm would be informed that the client wants a check sent to them.
+
+**amount: Int**
+
+The amount to disburse to the client. If the client chooses an instant method from the payout page, the net disbursement to them will be **amount - instant\_fee**.
+
+**authorizedIdentities: Identity\[\]**
+
+The identities that are authorized to accept the disbursement. Any of the authorized identities can be used on the payout page to access the disbursement. After the client authenticates on the payout page, we verify that the email or phone they used matches one of the authorizedIdentities.
+
+**client**
+
+The client that the disbursement is associated with. This is optional.
+
+**fundingAccount**
+
+The bank account the disbursement will come out of.
+
+**id**
+
+Unique identifier for the disbursement. UUID format.
+
+**matter**
+
+The matter the disbursement is associated with. This is optional.
+
+**metadata**
+
+A flexible JSON object that allows you to store and transfer arbitrary data. When a transaction is created for the disbursement, this metadata object is copied and added to the transaction. This lets you associate transactions with external entities and pass through custom data as needed.
+
+**status**
+
+`DRAFT` The disbursement has been created but has not been approved. At this stage there is no `url` and no funds can transferred.
+
+`APPROVED` The disbursement has been approved and is ready for the client to accept. At this status, the disbursement will have a unique `url`.
+
+`FUNDS_IN_TRANSIT` The client has visited the payout page, entered their method details, and accepted the funds but the funds have not reached the client’s account yet.
+
+`DELIVERED` The client has received the funds in their account.
+
+**transactions: Transaction\[\]**
+
+When the client accepts the disbursement a Transaction is created. Most disbursements will only have one transaction in this list.
+
+A disbursement may have two transactions in scenarios such as ACH returns. For example, if an ACH payout is initiated but the receiving bank rejects it, the transaction is returned. In this case, the disbursement would include two transactions: one for the initial payout and one for the ACH return.
+
+**url**
+
+The URL where the payout page is hosted, allowing the client to accept their funds. This field is nullable and will only be populated once the disbursement reaches the APPROVED status. The URL will change whenever the disbursement is updated, so it's important to provide the client with the new URL after any update, as the previous one will no longer be valid.
+
+## Create a Disbursement
+
+Use the `disbursementCreate` mutation to create a new disbursement.
+
+**Input**
+
+```typescript
+type DisbursementCreateInput = {
+  allowedMethods?: DisbursementMethod[];
+  amount: number; // in cents
+  authorizedIdentities: AuthorizedIdentity[];
+  clientId?: string;
+  clientUpsert?: ClientCreateInput;
+  fundingAccountId: string;
+  matterId?: string;
+  matterUpsert?: MatterCreateInput;
+  metadata?: JSON;
+  status?: DRAFT | APPROVED;
+}
+
+```
+
+**allowedMethods**
+
+This let’s you specify certain allowed methods for this disbursement only. If let blank, the disbursement will fallback to the Firm’s default methods.
+
+**clientUpsert**
+
+Links an existing client or creates and links a new one to the disbursement. This is useful for checking if the client is already in the system and linking them, or creating a new record if needed. Should not be used with `clientId`
+
+**metadata**
+
+A flexible JSON object that allows you to store and transfer arbitrary data. When a transaction is created for the disbursement, this metadata object is copied and saved on the transaction. This lets you associate transactions with external entities and pass through custom data as needed. For example, you could create a disbursement with `metadata = { mypartner_settlementId: 'my_settlement_id' }`. Then, when the client accepts their funds, the corresponding transaction object would have this same metadata.
+
+**status**
+
+You can pass `status=APPROVED` into the create call if you want to skip the approval process. Otherwise, the disbursement will be created in `DRAFT` and will need to be approved.
+
+## Update a Disbursement
+
+Use the `disbursementUpdate` mutation to update a disbursement. Disbursements can only be updated in `DRAFT` and `APPROVED` status.
+
+**Input**
+
+```
+type DisbursementUpdateInput = {
+  allowedMethods?: DisbursementMethod[];
+  amount: number; // in cents
+  authorizedIdentities: AuthorizedIdentity[];
+  clientId?: string;
+  clientUpsert?: CreateClientInput;
+  fundingAccountId: string;
+  matterId?: string;
+  matterUpsert?: CreateMatterInput;
+}
+
+```
+
+## Approve a Disbursement
+
+Use the `disbursementApprove` mutation to approve a disbursement. If successful, the disbursement will now have a unique url.
+
+## Unapprove a Disbursement
+
+You can use the `disbursementUnapprove` mutation to send the disbursement back to `DRAFT` and invalidate the previous url. When the disbursement is approved again, you will get a new url.
+
+## Delete a Disbursement
+
+Use the `disbursementDelete` mutation to delete a Disbursement. Disbursements can only be deleted in `DRAFT` and `APPROVED` status.
+
+## Get a Disbursement
+
+Fetch a single disbursement with `disbursementGet` query.
+
+## List Disbursements
+
+List disbursements that match the given query params with `disbursementList`.
+
+For a full list of available query parameters, see our [GraphQL Playground](https://api.sandbox.gravity-legal.com/).
+
+## Webhooks
+
+Get a webhook when a Disbursement is updated with the `disbursement.updated` webhook. Also get webhooks when a Disbursement is accepted via the `transaction.created` webhook. See the [webhooks docs](https://docs.confidolegal.com/docs/webhooks/overview)
