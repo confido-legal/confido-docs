@@ -1,0 +1,11 @@
+---
+title: Change the form type
+---
+
+As your UI switches between payment form types (`card`, `ach`), you must call this method to load the required fields.
+
+Calling `setActiveForm()` changes the fields that are loaded. You must ensure that the elements where the fields will be loaded are in the DOM before calling this method.
+
+```javascript
+window.gravityLegal.setActiveForm(type: FormType): void;
+```

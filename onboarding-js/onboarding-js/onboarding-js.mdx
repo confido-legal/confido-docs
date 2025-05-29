@@ -1,0 +1,16 @@
+---
+title: Onboarding.js
+---
+
+Onboarinding.js is a javascript library that lets you inject the Confido Legal onboarding form into any div on your page. This means your users never have to leave your app to get approved to accept payments.
+
+Here's how it works at a high level.
+
+1. Include onboarding.js on your page through a `script` tag
+2. Create an Onboarding Token for a Firm
+3. Call onboarding.js's `renderForm` method providing the Onboarding Token and a `containerId` to render the form into
+4. User fills out the form and Onboarding.js communicates directly with Confido to submit data.
+
+### Sequence Diagram
+
+<img src="https://res.cloudinary.com/djp21wtxm/image/upload/v1706110442/i1116x762-5xfPppfUjMOM_wdsawk.png" alt="" />

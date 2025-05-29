@@ -1,0 +1,33 @@
+---
+title: Overview
+---
+
+This is a reference guide for the Hosted Fields SDK. The SDK is a javascript file which should be loaded via a `script` tag on any page you want to load our hosted fields. Once the script loads the `window` object will have a `window.gravityLegal` object with the methods documented here. The `gravityLegal` object is a singleton. This means you can only having one instance of hosted fields per `window`.
+
+If you are looking to get started quickly, see the Hosted Fields [Quick Start Guide](/docs/hosted-fields/overview).
+
+You can use Hosted Fields when accepting a payment (Payment Session) or saving a payment method for later use (Save Payment Method Session). The main difference between the two are the API calls you will make before you initialize and after the fields have been submitted.
+
+## Including the script
+
+Include the script on any page you need to load the Hosted Fields.
+
+```html
+<script src="https://js.gravity-legal.com/hosted-fields.js" />
+
+<!-- Or in the Sandbox Environment -->
+
+<script src="https://js.sandbox.gravity-legal.com/hosted-fields.js" />
+```
+
+The script will use `window.postMessage` to post a message when it has finished loading and is ready for initialization. You can setup a listener to get notified.
+
+```typescript
+const myListener = (e) => {
+    if (e.data === "confido_hosted_fields_script_loaded") {
+        console.log("sdk is loaded!");
+    }
+};
+
+window.addEventListener("message", myListener);
+```

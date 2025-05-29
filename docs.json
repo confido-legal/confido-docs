@@ -87,20 +87,44 @@
                 ]
             },
             {
-                "tab": "API Reference",
+                "tab": "Hosted Fields SDK",
                 "groups": [
                     {
-                        "group": "API Documentation",
-                        "pages": ["api-reference/introduction"]
-                    },
-                    {
-                        "group": "Endpoint Examples",
+                        "group": "Hosted Fields JS",
                         "pages": [
-                            "api-reference/endpoint/get",
-                            "api-reference/endpoint/create",
-                            "api-reference/endpoint/delete",
-                            "api-reference/endpoint/webhook"
+                            "hosted-fields-sdk/hosted-fields-js/overview",
+                            "hosted-fields-sdk/hosted-fields-js/initialize",
+                            "hosted-fields-sdk/hosted-fields-js/change-events",
+                            "hosted-fields-sdk/hosted-fields-js/change-form-type",
+                            "hosted-fields-sdk/hosted-fields-js/submitting-fields",
+                            "hosted-fields-sdk/hosted-fields-js/state-object"
                         ]
+                    }
+                ]
+            },
+            {
+                "tab": "Onboarding.js",
+                "groups": [
+                    {
+                        "group": "Onboarding.js",
+                        "pages": [
+                            "onboarding-js/onboarding-js/onboarding-js",
+                            "onboarding-js/onboarding-js/include-script",
+                            "onboarding-js/onboarding-js/create-onboarding-token",
+                            "onboarding-js/onboarding-js/render-form",
+                            "onboarding-js/onboarding-js/change-events",
+                            "onboarding-js/onboarding-js/custom-styles",
+                            "onboarding-js/onboarding-js/owner-invite-links"
+                        ]
+                    }
+                ]
+            },
+            {
+                "tab": "Examples",
+                "groups": [
+                    {
+                        "group": "Exmaples",
+                        "pages": ["examples/examples"]
                     }
                 ]
             }

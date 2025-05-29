@@ -1,0 +1,184 @@
+---
+title: The State Object
+---
+
+import { ObjectDoc } from "@components/ui/objectdoc";
+
+The state object represents the internal state of the fields. The current state is included on every [change event](/reference/hosted-fields-js/change-events).
+
+You can also always call the `getState()` method to retrieve the current state of the fields.
+
+```javascript
+const currentState = window.gravityLegal.getState(): HostedFieldsState
+```
+
+export const FieldStateFields = [
+    {
+        name: "containerId",
+        type: "string",
+    },
+    {
+        name: "loading",
+        type: "boolean",
+        description: "`true` if the field is still loading.",
+    },
+    {
+        name: "error",
+        type: "Error",
+        description: "This will be set when the field has a validation error.",
+    },
+];
+
+export const StateDef = {
+    name: "state",
+    type: "object",
+    description: "The current state of the fields.",
+    defaultFieldsOpen: true,
+    fields: [
+        {
+            name: "activeForm",
+            type: "enum",
+            enumValues: [
+                {
+                    value: "card",
+                },
+                {
+                    value: "ach",
+                },
+            ],
+        },
+        {
+            name: "cardData",
+            type: "object",
+            description: "Information about the type of card that was entered. Applicable only when `activeForm=card`",
+            fields: [
+                {
+                    name: "bin",
+                    type: "string",
+                    description: "The first six digits of the card number that was entered.",
+                },
+                {
+                    name: "cardType",
+                    type: "enum",
+                    description: "The type of card that was entered: `credit` or `debit`",
+                },
+                {
+                    name: "brand",
+                    type: "enum",
+                    description:
+                        "The card brand that was entered. eg: `visa`, `mastercard`, etc. You can use this data to display a credit card icon on your page.",
+                    enumValues: [
+                        {
+                            value: "visa",
+                        },
+                        {
+                            value: "mastercard",
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            name: "fields",
+            description: "The state of the hosted fields.",
+            fields: [
+                {
+                    name: "cardNumber",
+                    description: "State of the card number field.",
+                    type: "object",
+                    fields: FieldStateFields,
+                },
+                {
+                    name: "cardExpirationDate",
+                    description: "State of the card expiration date field.",
+                    type: "object",
+                    fields: FieldStateFields,
+                },
+                {
+                    name: "cardSecurityCode",
+                    description: "State of the card security code field.",
+                    type: "object",
+                    fields: FieldStateFields,
+                },
+                {
+                    name: "accountNumber",
+                    description: "State of the account number field.",
+                    type: "object",
+                    fields: FieldStateFields,
+                },
+                {
+                    name: "routingNumber",
+                    description: "State of the routing number field.",
+                    type: "object",
+                    fields: FieldStateFields,
+                },
+                {
+                    name: "accountHolderName",
+                    description: "State of the account holder name field.",
+                    type: "object",
+                    fields: FieldStateFields,
+                },
+            ],
+        },
+        {
+            name: "initError",
+            type: "Error",
+            description: "Set when there is an initialization error.",
+        },
+        {
+            name: "initializing",
+            type: "boolean",
+            description: "`true` when the sdk is still initializing.",
+        },
+        {
+            name: "isSubmitting",
+            type: "boolean",
+            description:
+                "`true` after `sdk.submitFields()` is called and before the fields are done submitting their data.",
+        },
+        {
+            name: "paymentMethod",
+            type: "enum",
+            description: "",
+            enumValues: [
+                {
+                    value: "ACH",
+                    description: "",
+                },
+                {
+                    value: "CREDIT",
+                    description: "",
+                },
+                {
+                    value: "DEBIT",
+                    description: "",
+                },
+            ],
+        },
+        {
+            name: "surcharging",
+            type: "object",
+            description: "Info about surcharging. This is only applicable when the `activeForm` is `card`.",
+            fields: [
+                {
+                    name: "active",
+                    type: "boolean",
+                    description: "",
+                },
+                {
+                    name: "willBeApplied",
+                    type: "boolean",
+                    description:
+                        "Whether the surchage rate will be applied or not. If surcharging is enabled by the firm, this will show as `true` when the `cardNumber` field has been filled out and the `bin_loaded` event has been produced by the form.",
+                },
+                {
+                    name: "rate",
+                    type: "number",
+                    description: "The surcharge rate to be multiplied by the amount and added to the payment.",
+                },
+            ],
+        },
+    ],
+};
+
+<ObjectDoc objectDefinition={StateDef} />

@@ -1,0 +1,24 @@
+---
+title: Render the Form
+---
+
+Now that you have an Onboarding Token and have passed it to the client, you are ready to render the form.
+
+```javascript
+window.confidoOnboarding.renderForm({
+    containerId: "my-container-id",
+    token: onboardingToken,
+    disableOwnerInvite: true, // optional
+    onChange: myChangeHandler, // optional
+    style: {}, // optional
+    suppressLoadingSpinner: boolean, // optional, when true won't show a loading spinner
+});
+```
+
+This function uses `document.getElementById` to find the `div` using the passed in `containerId` and injects the form there.
+
+You can pass an optional `onChange` handler to `renderForm` which will get called when there are changes to the form.
+
+## Example Blank Form
+
+![blank form](https://res.cloudinary.com/djp21wtxm/image/upload/v1706144239/i473x1445-e3DmCNedkPzH_gcqim5.png)

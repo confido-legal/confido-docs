@@ -1,0 +1,52 @@
+---
+title: Create an Onboarding Token
+---
+
+import { Note } from "@components/ui/note";
+
+To render the form, you will need a public Onboarding Token. The token is used by onboarding.js for authorization and scopes the requests to the Confido Firm that it was created for.
+
+Onboarding Tokens can be shared with the client and are valid for 24 hours. If a token expires, you will need to create a new one and re-render the form.
+
+There are two ways to create an Onboarding Token:
+
+1. Directly through the `createOnboardingToken` mutation. Use this when you already have a Firm API Token.
+2. By requesting a token in the result of the `createFirm` mutation. Use this when you know you want to render the form soon after you create the Firm.
+
+## `createOnboardingToken` mutation
+
+Use the `createOnboardingToken` mutation when the Firm is already created in Confido.
+
+```graphql
+mutation CreateOnboardingToken {
+    createOnboardingToken {
+        token
+    }
+}
+```
+
+<Note type="info">
+    This is a Firm level request, so you must use a Firm API Token on the `x-api-key` header. This tells us which Firm
+    you want to create the token for.
+</Note>
+
+## In `createFirm` Result
+
+You can also get an Onboarding Token in the result of a `createFirm` mutation. This is useful if you would like to immediately render the onboarding form after creating a Firm. Remember, Onboarding Tokens are valid for 24 hours.
+
+```graphql
+mutation CreateFirm() {
+  createFirm() {
+    onboardingToken {
+      token
+    }
+  }
+}
+```
+
+<Note type="hint">
+    You can find detailed information about all queries and mutations in our [GraphQL
+    Playground](https://api.sandbox.gravity-legal.com/v2).
+</Note>
+
+Once you have a token, you will pass it to the client where you can render the form.

@@ -1,0 +1,170 @@
+---
+title: Initialize
+---
+
+import { ObjectDoc } from "@components/ui/objectdoc";
+
+You can initialize the fields by calling the `init()` method. Once this method is called, the sdk will emit the `initializing`, `initialized`, and/or the `init_error` [change events](/reference/hosted-fields-js/change-events).
+
+```javascript
+window.gravityLegal.init(options: Options): Promise<void>;
+```
+
+You can call `init()` multiple times in the same context. Each call will trigger a new `initializing`, `initalized`, and/or `init_error` sequence. The fields will also be reloaded each time `init()` is called.
+
+### Example
+
+Example initializing the hosted fields for a Payment session.
+
+```typescript
+async function initHostedFields() {
+    const res = await getPaymentTokenFromMyBackend();
+
+    const fieldStyles = {
+        border: "none",
+        color: "rgb(26, 32, 44)",
+        "font-family": '-apple-system, "system-ui", "Segoe UI", Helvetica, Arial, sans-serif',
+        "font-weight": 400,
+        height: "38px",
+        width: "100%",
+        "font-size": "16px",
+    };
+
+    window.gravityLegal.init({
+        paymentToken: res.paymentToken,
+        activeForm: "card",
+        fields: {
+            accountNumber: {
+                containerId: "account-number",
+                style: fieldStyle,
+            },
+            accountHolderName: {
+                containerId: "account-holder-name",
+                style: fieldStyle,
+            },
+            routingNumber: {
+                containerId: "routing-number",
+                style: fieldStyle,
+            },
+            cardNumber: {
+                containerId: "card-number",
+                style: fieldStyle,
+            },
+            cardExpirationDate: {
+                containerId: "card-exp",
+                style: fieldStyle,
+            },
+            cardSecurityCode: {
+                containerId: "card-cvv",
+                style: fieldStyle,
+            },
+        },
+    });
+}
+```
+
+### Method parameters
+
+export const FieldConfigFields = [
+    {
+        name: "containerId",
+        description: "id for the element to inject field at",
+        type: "string",
+        isRequired: true,
+    },
+    {
+        name: "style",
+        description: "CSS style to apply to the input tag",
+        type: "CSSStyles",
+    },
+];
+
+export const Options = {
+    name: "options",
+    description: "Initialization options.",
+    type: "object",
+    isRequired: true,
+    defaultFieldsOpen: true,
+    fields: [
+        {
+            name: "paymentToken",
+            type: "string",
+            description:
+                "Payment Token returned from a Start Payment Session call. Required when using a Payment Session type.",
+        },
+        {
+            name: "savePaymentMethodToken",
+            type: "string",
+            description:
+                "Token returned from a createSavePaymentMethodToken mutation call. Required when using a Save Payment Method Session type.",
+        },
+        {
+            name: "activeForm",
+            isRequired: true,
+            type: "enum",
+            description:
+                "Form type to initialize first. The div's for the respected fields must be in the DOM before you initialize. The SDK uses document.getElementById(containerId) to find the element.",
+            enumValues: [
+                {
+                    value: "card",
+                    description:
+                        "Card form which includes the card number, card expiration date, and card security code fields.",
+                },
+                {
+                    value: "ach",
+                    description:
+                        "ACH form which includes the accout number, account holder name, and routing number fields.",
+                },
+            ],
+        },
+        {
+            name: "fields",
+            description: "Configuration for the hosted fields",
+            isRequired: true,
+            type: "object (FieldConfigMap)",
+            fields: [
+                {
+                    name: "cardNumber",
+                    description: "Configuration for the card number field. Required when activeForm = `card`",
+                    type: "FieldConfig",
+                    fields: FieldConfigFields,
+                },
+                {
+                    name: "cardExpirationDate",
+                    description: "Configuration for the card expiration date field. Required when activeForm = `card`",
+                    type: "FieldConfig",
+                    fields: FieldConfigFields,
+                },
+                {
+                    name: "cardSecurityCode",
+                    description: "Configuration for the card security code field. Required when activeForm = `card`",
+                    type: "FieldConfig",
+                },
+                {
+                    name: "accountHolderName",
+                    description:
+                        "Field config for the account holder name field for ACH payments. Required when supporting ACH payments.",
+                    type: "FieldConfig",
+                    fields: FieldConfigFields,
+                },
+                {
+                    name: "routingNumber",
+                    description: "Configuration for the card number field. Required when activeForm = `card`",
+                    type: "FieldConfig",
+                    fields: FieldConfigFields,
+                },
+                {
+                    name: "accountNumber",
+                    description:
+                        "Field config for the account number field for ACH payments. Required when supporting ACH payments.",
+                    type: "FieldConfig",
+                    fields: FieldConfigFields,
+                },
+            ],
+        },
+    ],
+};
+
+Details for each property on the options object.
+
+<ObjectDoc objectDefinition={Options} />

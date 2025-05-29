@@ -1,0 +1,38 @@
+---
+title: Owner Invite Links
+---
+
+To comply with standards we need to collect personal information for any business owner that owns more than 25% of the company.
+
+Sometimes, the owners are not the ones filling out the onboarding form. In these cases, the user filling the form can generate a unique link and send it to the owner so they can fill in their own information.
+
+This feature is enabled by default on the onboarding.js form. By default, the generated link will point to Confido Legal's owner information form. But you can create your own page using onboarding.js to keep users on your domain.
+
+## Hosting an Owner Form on your domain
+
+You can host your own owner form on your domain. This lets you keep users on your platform instead of directing them to Confido's owner form.
+
+You can use onboarding.js to host an owner form. Very similar to the `renderForm` function, there is also a `renderOwnerForm` function.
+
+You pass a url to the `renderForm` function under the `ownerInviteUrl` prop. This url should be a page that you manage and that utilizes the `renderOwnerForm` function. When a user generates a owner invite link the returned url will have a `o_code` query parameter. On your page, you will need to grab this param and pass it into `renderOwnerForm`.
+
+For example, if you passed the following url into `renderForm` under the `ownerInviteUrl` opt:  
+`https://my-app.com/owner-form`
+
+Then the generated url would look something like this:  
+`https://my-app.com/owner-form?o_code=owner_d97b6badb88240f35c263357b21`
+
+On your page, you would grab the `o_code` and pass it into the `renderOwnerForm` method of `confidoOnboarding`.
+
+```js
+confidoOnboarding.renderOwnerForm({
+  code: 'owner_d97b6badb88240f35c263357b21',
+  containerId: 'my-container',
+  onChange?: myOnChangeHandler,
+  style?: ConfidoStyleOptions,
+})
+```
+
+## Disabling Owner Invite Links
+
+If you do not want to offer this function for your users, you can disable the feature by passing the `disableOwnerInvite: true` option to `renderForm`.
