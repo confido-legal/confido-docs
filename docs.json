@@ -137,7 +137,7 @@
       "anchors": [
         {
           "anchor": "GraphQL Playground",
-          "href": "https://api.gravity-legal.com",
+          "href": "https://api.sandbox.gravity-legal.com",
           "icon": "webhook"
         }
       ]
@@ -162,17 +162,6 @@
     "socials": {
       "github": "https://github.com/confido-legal",
       "linkedin": "https://www.linkedin.com/company/confidolegal/posts/?feedView=all"
-    },
-    "links": [
-      {
-        "header": "c",
-        "items": [
-          {
-            "label": "Partner Portal",
-            "href": "https://app.sandbox.confidolegal.com"
-          }
-        ]
-      }
-    ]
+    }
   }
 }

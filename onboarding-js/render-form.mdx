@@ -2,16 +2,16 @@
 title: Render the Form
 ---
 
-Now that you have an Onboarding Token and have passed it to the client, you are ready to render the form.
+Now that you have an Onboarding Token and have passed it to the browser, you are ready to render the form.
 
 ```javascript
 window.confidoOnboarding.renderForm({
-    containerId: "my-container-id",
-    token: onboardingToken,
-    disableOwnerInvite: true, // optional
-    onChange: myChangeHandler, // optional
-    style: {}, // optional
-    suppressLoadingSpinner: boolean, // optional, when true won't show a loading spinner
+  containerId: "my-container-id",
+  token: onboardingToken,
+  disableOwnerInvite: true, // optional
+  onChange: myChangeHandler, // optional
+  style: {}, // optional
+  suppressLoadingSpinner: boolean, // optional, when true won't show a loading spinner
 });
 ```
 

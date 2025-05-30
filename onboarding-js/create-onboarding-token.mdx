@@ -17,15 +17,15 @@ Use the `createOnboardingToken` mutation when the Firm is already created in Con
 
 ```graphql
 mutation CreateOnboardingToken {
-    createOnboardingToken {
-        token
-    }
+  createOnboardingToken {
+    token
+  }
 }
 ```
 
 <Note>
-    This is a Firm level request, so you must use a Firm API Token on the `x-api-key` header. This tells us which Firm
-    you want to create the token for.
+  This is a Firm level request, so you must use a Firm API Token on the
+  `x-api-key` header. This tells us which Firm you want to create the token for.
 </Note>
 
 ## In `createFirm` Result
@@ -43,8 +43,8 @@ mutation CreateFirm() {
 ```
 
 <Note>
-    You can find detailed information about all queries and mutations in our [GraphQL
-    Playground](https://api.sandbox.gravity-legal.com/v2).
+  You can find detailed information about all queries and mutations in our
+  [GraphQL Playground](https://api.sandbox.gravity-legal.com/v2).
 </Note>
 
-Once you have a token, you will pass it to the client where you can render the form.
+Once you have a token, you will pass it to the browser where you can render the form.

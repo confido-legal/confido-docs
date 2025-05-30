@@ -4,12 +4,16 @@ title: Include the script
 
 You must include the script on any page where you want to inject the Onboarding form.
 
-```html
-<script src="https://js.gravity-legal.com/onboarding.js" />
+<CodeGroup>
 
-<!-- Or in the Sandbox Environment -->
-
+```html sandbox
 <script src="https://js.sandbox.gravity-legal.com/onboarding.js" />
 ```
+
+```html production
+<script src="https://js.gravity-legal.com/onboarding.js" />
+```
+
+</CodeGroup>
 
 Once the script loads, the `window` object will have a `window.confidoOnboarding` object with all the methods required for white listing the onboarding process. The `confidoOnboarding` object has a method `renderForm` that we will call later to actually render the form. But first, we need to create an Onboarding Token.
