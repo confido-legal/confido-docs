@@ -5,7 +5,7 @@ noFooterNav: true
 includeFeedback: false
 ---
 
-import { Note } from "@components/ui/note";
+import { supportEmail } from "/snippets/variables.mdx";
 
 There are multiple types of tokens that can be used with the Confido Legal API. This page covers when each api token should be used, how to acquire the various api tokens, and other information related to Authorization.
 
@@ -18,13 +18,17 @@ The types of API tokens are:
 
 To use an API token, add it to your request as the `x-api-key` header.
 
+<Tip>
+Our API tokens are prefixed with some human readable information. For example, a Partner Token may start with `p_secret_sandbox_`. The `p` indicates it's a Partner Token, `secret` indicates it's a secret and should be treated as one, and `sandbox` indicates that this is for the sandbox environment.
+</Tip>
+
 ### Partner Token
 
-Partner tokens are generated through the Confido Legal partner portal under [Settings](https://app.sandbox.gravity-legal.com/partners/settings).
+Partner tokens are generated through the Confido Legal partner portal under **settings**.
 
-If you do not have a partner account, please reach out to support@confidolegal.com and we will get you set up.
+If you do not have a partner account, please reach out to **{supportEmail}** and we will get you set up.
 
-<Note type="warning">Partner tokens should never be shared with the frontend. Keep them secured on your server.</Note>
+<Note>Partner tokens should never be shared with the frontend. Keep them secured on your server.</Note>
 
 The primary use of a Partner Token is to create Firms and Firm Tokens. Below is an example partner token.
 
@@ -38,7 +42,7 @@ The primary use of a Partner Token is to create Firms and Firm Tokens. Below is 
 
 Firm tokens are generated with the `createFirmApiToken` mutation or the `createFirm` mutation. This request can be made using a Partner API Token.
 
-<Note type="warning">Firm tokens should never be shared with the frontend. Keep them secured on your server.</Note>
+<Note>Firm tokens should never be shared with the frontend. Keep them secured on your server.</Note>
 
 Firm tokens are used for most requests to the Confido Legal API. Some common examples are `addPaymentLink`, `addClient`, and `addMatter`. They are also used to create Payment Session Tokens for [hosted fields](/docs/hosted-fields/starting-a-payment-session). Below is an example firm token.
 

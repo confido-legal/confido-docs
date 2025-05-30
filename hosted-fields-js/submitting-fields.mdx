@@ -1,0 +1,39 @@
+---
+title: Submitting the Fields
+---
+
+Call this method when you are ready to submit the data in the fields. This method returns a Promise that you can `await` or you can pass in a `callback`. The `callback` will be invoked when the field data has been submitted successfully or there was an error.
+
+Once the data is submitted successfully, you are ready to finish the payment on your server.
+
+```javascript
+window.confidoHostedFields.submitFields(callback: SubmitFieldsCallback);
+```
+
+### Example with Promise
+
+```javascript
+const handleSubmit = () => {
+  try {
+    await window.confidoHostedFields.submitFields();
+    // the fields were submitted successfully
+  } catch (error) {
+    // do something to show the error
+  }
+};
+```
+
+### Example with callback
+
+```javascript
+const handleSubmit = () => {
+  window.confidoHostedFields.submitFields((error) => {
+    if (error) {
+      // do something to show the error
+      return;
+    }
+
+    // else the fields were submitted successfully
+  });
+};
+```

@@ -3,21 +3,21 @@ title: Firm Status
 includeTOC: true
 ---
 
-When a firm is onboarding, the `firm.status` field will go through the following values. A `firm.updated` [webhook](/docs/webhooks/overview) will be sent out every time the status changes.
+When a Firm is onboarding, the `firm.status` field will go through the following values. A `firm.updated` [webhook](/docs/webhooks/configure) will be sent out every time the status changes.
 
-`CREATED` -> The firm was created but there hasn't been any edits to the application so far.
+`CREATED` -> The Firm was created but there hasn't been any edits to the application so far.
 
-`APP_IN_DRAFT` -> The application for the firm has been updated and is currently being filled out.
+`APP_IN_DRAFT` -> The application for the Firm has been updated and is currently being filled out.
 
 `APP_SUBMITTED` -> The application has been submitted and is waiting for the authorized signer to complete the agreement.
 
 `APP_IN_REVIEW` -> Agreement has been signed and the application is under review.
 
-`ACTIVE` -> The firm has passed underwriting and is ready to start processing payments.
+`ACTIVE` -> The Firm has passed underwriting and is ready to start processing payments.
 
-`INACTIVE` -> The firm is no longer able to process payments.
+`INACTIVE` -> The Firm is no longer able to process payments.
 
-Below is a simple query that gets the status of a firm. See the [GraphQL Playground](https://api.sandbox.gravity-legal.com/) for the complete list of fields available on the Firm object.
+Below is a simple query that gets the status of a Firm. See the [GraphQL Playground](https://api.sandbox.gravity-legal.com/) for the complete list of fields available on the Firm object.
 
 ```graphql
 query GetFirm {

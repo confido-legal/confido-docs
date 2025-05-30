@@ -2,8 +2,6 @@
 title: Voids and Refunds
 ---
 
-import { Note } from "@components/ui/note";
-
 ### Voids
 
 After a successful payment has been made, there is a short period in which it can be voided using the `voidTransaction` mutation. This period depends on the payment method used when processing the payment.
@@ -15,9 +13,9 @@ After a successful payment has been made, there is a short period in which it ca
 
 The `Transaction` object has a `canVoid` boolean that indicates whether or not the transaction can be voided.
 
-<Note type="info">
+<Warning>
     Payments on an [Aggregate Payment Link](/docs/payment-vehicles/aggregate-payment-links) can't be voided.
-</Note>
+</Warning>
 
 ### Refunds
 

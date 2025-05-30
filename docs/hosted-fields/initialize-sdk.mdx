@@ -18,56 +18,56 @@ The script will use `window.postMessage` to post a message when it has finished 
 
 ```typescript
 const myListener = (e) => {
-    if (e.data === "confido_hosted_fields_script_loaded") {
-        console.log("sdk is loaded!");
-    }
+  if (e.data === "confido_hosted_fields_script_loaded") {
+    console.log("sdk is loaded!");
+  }
 };
 
 window.addEventListener("message", myListener);
 ```
 
-Then initialize the sdk with the Payment Token. For a more detailed explanation of the `init()` method, see the [Hosted Fields SDK Reference Docs](/reference/hosted-fields-js/initialize).
+Then initialize the sdk with the Payment Token. For a more detailed explanation of the `init()` method, see the [Hosted Fields SDK Reference Docs](/hosted-fields-js/initialize).
 
 ```javascript
 // Optional CSS styles to customize the
 // look of the fields
 const fieldStyles = {
-    border: "none",
-    color: "rgb(26, 32, 44)",
-    "font-weight": 400,
-    height: "38px",
-    width: "100%",
-    "font-size": "16px",
+  border: "none",
+  color: "rgb(26, 32, 44)",
+  "font-weight": 400,
+  height: "38px",
+  width: "100%",
+  "font-size": "16px",
 };
 
-window.gravityLegal.init({
-    paymentToken,
-    activeForm: "card",
-    fields: {
-        accountNumber: {
-            containerId: "account-number",
-            style: fieldStyles,
-        },
-        accountHolderName: {
-            containerId: "account-holder-name",
-            style: fieldStyles,
-        },
-        routingNumber: {
-            containerId: "routing-number",
-            style: fieldStyles,
-        },
-        cardNumber: {
-            containerId: "card-number",
-            style: fieldStyles,
-        },
-        cardExpirationDate: {
-            containerId: "card-exp",
-            style: fieldStyles,
-        },
-        cardSecurityCode: {
-            containerId: "card-cvv",
-            style: fieldStyles,
-        },
+window.confidoHostedFields.init({
+  paymentToken,
+  activeForm: "card",
+  fields: {
+    accountNumber: {
+      containerId: "account-number",
+      style: fieldStyles,
     },
+    accountHolderName: {
+      containerId: "account-holder-name",
+      style: fieldStyles,
+    },
+    routingNumber: {
+      containerId: "routing-number",
+      style: fieldStyles,
+    },
+    cardNumber: {
+      containerId: "card-number",
+      style: fieldStyles,
+    },
+    cardExpirationDate: {
+      containerId: "card-exp",
+      style: fieldStyles,
+    },
+    cardSecurityCode: {
+      containerId: "card-cvv",
+      style: fieldStyles,
+    },
+  },
 });
 ```

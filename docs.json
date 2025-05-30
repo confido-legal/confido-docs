@@ -1,165 +1,182 @@
 {
-    "$schema": "https://mintlify.com/docs.json",
-    "theme": "mint",
-    "name": "Confido Legal Docs",
-    "colors": {
-        "primary": "#3182CE",
-        "light": "#63B3ED",
-        "dark": "#2B6CB0"
-    },
-    "favicon": "/favicon.svg",
-    "navigation": {
-        "tabs": [
-            {
-                "tab": "Docs",
-                "groups": [
-                    {
-                        "group": "Introduction",
-                        "pages": [
-                            "docs/introduction/overview",
-                            "docs/introduction/sandbox-environment",
-                            "docs/introduction/authorization",
-                            "docs/introduction/api-limits"
-                        ]
-                    },
-                    {
-                        "group": "Firm Onboarding",
-                        "pages": [
-                            "docs/firm-onboarding/overview",
-                            "docs/firm-onboarding/connect",
-                            "docs/firm-onboarding/sign-up-links",
-                            "docs/firm-onboarding/firm-status"
-                        ]
-                    },
-                    {
-                        "group": "Recieve Money",
-                        "pages": [
-                            "docs/recieve-money/payment-links",
-                            "docs/recieve-money/aggregate-payment-links",
-                            "docs/recieve-money/stored-payment-methods",
-                            "docs/recieve-money/subscriptions",
-                            "docs/recieve-money/payment-intents"
-                        ]
-                    },
-                    {
-                        "group": "Send Money (Disbursements)",
-                        "pages": ["docs/send-money/disbursements", "docs/send-money/expiration"]
-                    },
-                    {
-                        "group": "Payment Methods",
-                        "pages": [
-                            "docs/payment-methods/credit-debit-card",
-                            "docs/payment-methods/same-day-ach",
-                            "docs/payment-methods/manual-payments"
-                        ]
-                    },
-                    {
-                        "group": "Payments Lifecycle",
-                        "pages": [
-                            "docs/payments-lifecycle/overview",
-                            "docs/payments-lifecycle/voids-and-refunds",
-                            "docs/payments-lifecycle/ach-returns"
-                        ]
-                    },
-                    {
-                        "group": "Hosted Fields",
-                        "pages": [
-                            "docs/hosted-fields/overview",
-                            "docs/hosted-fields/trusted-domains",
-                            "docs/hosted-fields/create-public-token",
-                            "docs/hosted-fields/listen-for-changes",
-                            "docs/hosted-fields/initialize-sdk",
-                            "docs/hosted-fields/complete-session"
-                        ]
-                    },
-                    {
-                        "group": "Statements",
-                        "pages": ["docs/statements/overview"]
-                    },
-                    {
-                        "group": "Webhooks",
-                        "pages": ["docs/webhooks/overview", "docs/webhooks/webhook-types"]
-                    },
-                    {
-                        "group": "Sandbox",
-                        "pages": ["docs/sandbox/test-payment-methods"]
-                    }
-                ]
-            },
-            {
-                "tab": "Hosted Fields SDK",
-                "groups": [
-                    {
-                        "group": "Hosted Fields JS",
-                        "pages": [
-                            "hosted-fields-sdk/hosted-fields-js/overview",
-                            "hosted-fields-sdk/hosted-fields-js/initialize",
-                            "hosted-fields-sdk/hosted-fields-js/change-events",
-                            "hosted-fields-sdk/hosted-fields-js/change-form-type",
-                            "hosted-fields-sdk/hosted-fields-js/submitting-fields",
-                            "hosted-fields-sdk/hosted-fields-js/state-object"
-                        ]
-                    }
-                ]
-            },
-            {
-                "tab": "Onboarding.js",
-                "groups": [
-                    {
-                        "group": "Onboarding.js",
-                        "pages": [
-                            "onboarding-js/onboarding-js/onboarding-js",
-                            "onboarding-js/onboarding-js/include-script",
-                            "onboarding-js/onboarding-js/create-onboarding-token",
-                            "onboarding-js/onboarding-js/render-form",
-                            "onboarding-js/onboarding-js/change-events",
-                            "onboarding-js/onboarding-js/custom-styles",
-                            "onboarding-js/onboarding-js/owner-invite-links"
-                        ]
-                    }
-                ]
-            },
-            {
-                "tab": "Examples",
-                "groups": [
-                    {
-                        "group": "Exmaples",
-                        "pages": ["examples/examples"]
-                    }
-                ]
-            }
-        ],
-        "global": {
-            "anchors": [
-                {
-                    "anchor": "GraphQL Playground",
-                    "href": "https://api.gravity-legal.com",
-                    "icon": "webhook"
-                }
-            ]
-        }
-    },
-    "logo": {
-        "light": "/logo/confido-light.svg",
-        "dark": "/logo/dark.svg"
-    },
-    "navbar": {
-        "links": [
-            {
-                "label": "Support",
-                "href": "mailto:hi@mintlify.com"
-            }
-        ],
-        "primary": {
-            "type": "button",
-            "label": "Login",
-            "href": "https://app.sandbox.confidolegal.com"
-        }
-    },
-    "footer": {
-        "socials": {
-            "github": "https://github.com/confido-legal",
-            "linkedin": "https://www.linkedin.com/company/confidolegal/posts/?feedView=all"
-        }
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "banner": {
+    "content": "🚀 Banner is live! [Learn more](mintlify.com)",
+    "dismissible": true
+  },
+  "name": "Confido Legal Docs",
+  "description": "Confido Legal is a payment platform for law firms, enabling them to accept payments online, manage client billing, and streamline financial operations.",
+  "colors": {
+    "primary": "#3182CE",
+    "light": "#63B3ED",
+    "dark": "#2B6CB0"
+  },
+  "errors": {
+    "404": {
+      "redirect": false
     }
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Docs",
+        "groups": [
+          {
+            "group": "Introduction",
+            "pages": [
+              "docs/introduction/overview",
+              "docs/introduction/sandbox-environment",
+              "docs/introduction/authorization",
+              "docs/introduction/api-limits"
+            ]
+          },
+          {
+            "group": "Firm Onboarding",
+            "pages": [
+              "docs/firm-onboarding/overview",
+              "docs/firm-onboarding/connect",
+              "docs/firm-onboarding/sign-up-links",
+              "docs/firm-onboarding/firm-status"
+            ]
+          },
+          {
+            "group": "Recieve Money",
+            "pages": [
+              "docs/recieve-money/payment-links",
+              "docs/recieve-money/aggregate-payment-links",
+              "docs/recieve-money/stored-payment-methods",
+              "docs/recieve-money/subscriptions",
+              "docs/recieve-money/payment-intents"
+            ]
+          },
+          {
+            "group": "Send Money (Disbursements)",
+            "pages": [
+              "docs/send-money/disbursements",
+              "docs/send-money/expiration"
+            ]
+          },
+          {
+            "group": "Payment Methods",
+            "pages": [
+              "docs/payment-methods/credit-debit-card",
+              "docs/payment-methods/same-day-ach",
+              "docs/payment-methods/manual-payments"
+            ]
+          },
+          {
+            "group": "Payments Lifecycle",
+            "pages": [
+              "docs/payments-lifecycle/overview",
+              "docs/payments-lifecycle/voids-and-refunds",
+              "docs/payments-lifecycle/ach-returns"
+            ]
+          },
+          {
+            "group": "Hosted Fields",
+            "pages": [
+              "docs/hosted-fields/overview",
+              "docs/hosted-fields/trusted-domains",
+              "docs/hosted-fields/create-public-token",
+              "docs/hosted-fields/listen-for-changes",
+              "docs/hosted-fields/initialize-sdk",
+              "docs/hosted-fields/complete-session"
+            ]
+          },
+          {
+            "group": "Statements",
+            "pages": ["docs/statements/overview"]
+          },
+          {
+            "group": "Webhooks",
+            "pages": ["docs/webhooks/configure", "docs/webhooks/webhook-types"]
+          },
+          {
+            "group": "Sandbox",
+            "pages": ["docs/sandbox/test-payment-methods"]
+          }
+        ]
+      },
+      {
+        "tab": "hosted-fields.js",
+        "groups": [
+          {
+            "group": "Hosted Fields",
+            "pages": [
+              "hosted-fields-js/overview",
+              "hosted-fields-js/initialize",
+              "hosted-fields-js/change-events",
+              "hosted-fields-js/change-form-type",
+              "hosted-fields-js/submitting-fields",
+              "hosted-fields-js/state-object"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "onboarding.js",
+        "groups": [
+          {
+            "group": "Onboarding.js",
+            "pages": [
+              "onboarding-js/overview",
+              "onboarding-js/include-script",
+              "onboarding-js/create-onboarding-token",
+              "onboarding-js/render-form",
+              "onboarding-js/change-events",
+              "onboarding-js/custom-styles",
+              "onboarding-js/owner-invite-links"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Examples",
+        "pages": ["examples/legal-wave", "examples/code-sandbox"]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "GraphQL Playground",
+          "href": "https://api.gravity-legal.com",
+          "icon": "webhook"
+        }
+      ]
+    }
+  },
+  "logo": {
+    "light": "/logo/confido-light.svg",
+    "dark": "/logo/confido-dark.svg"
+  },
+  "navbar": {
+    "links": [],
+    "primary": {
+      "type": "button",
+      "label": "Login",
+      "href": "https://app.sandbox.confidolegal.com"
+    }
+  },
+  "styling": {
+    "codeblocks": "system"
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/confido-legal",
+      "linkedin": "https://www.linkedin.com/company/confidolegal/posts/?feedView=all"
+    },
+    "links": [
+      {
+        "header": "c",
+        "items": [
+          {
+            "label": "Partner Portal",
+            "href": "https://app.sandbox.confidolegal.com"
+          }
+        ]
+      }
+    ]
+  }
 }

@@ -2,8 +2,6 @@
 title: Change Events
 ---
 
-import { ObjectDoc } from "@components/ui/objectdoc";
-
 Onboarding.js will call the `onChange` handler passed into `renderForm` when certain events happen within the form.
 
 ## Event Types
@@ -20,38 +18,21 @@ Onboarding.js will call the `onChange` handler passed into `renderForm` when cer
 | `token_expired`        | The onboarding token has expired. You must create a new one and re-render.                                                        |
 | `token_expires_soon`   | The onboarding token will expire in 5 or less minutes. The user will want to save their progress so they don't lose unsaved data. |
 
-### ChangeEvent
+## ChangeEvent
 
-export const ChangeEventDef = {
-    name: "changeEvent",
-    type: "object",
-    defaultFieldsOpen: true,
-    fields: [
-        {
-            name: "type",
-            type: "enum",
-            description: "The type of event. See table above for list.",
-        },
-        {
-            isRequired: false,
-            name: "errorMessage",
-            type: "string",
-            description: "The error message. Only set if this event is an error type.",
-        },
-        {
-            isRequired: false,
-            name: "onboardingData",
-            type: "object",
-            description:
-                "Object containing all the currently saved data in the form. This will not include data that has been entered but not saved.",
-        },
-        {
-            isRequired: false,
-            name: "tokenExpiresAt",
-            type: "string",
-            description: "An ISO timestamp of the time at which the token will expire.",
-        },
-    ],
-};
+<ParamField body="type" type="string" required>
+  The type of event. This can be one of the types listed above.
+</ParamField>
 
-<ObjectDoc objectDefinition={ChangeEventDef} />
+<ParamField body="errorMessage" type="string">
+  The error message. Only set if this event is an error type.
+</ParamField>
+
+<ParamField body="onboardingData" type="object">
+  Object containing all the currently saved data in the form. This will not
+  include data that has been entered but not saved.
+</ParamField>
+
+<ParamField body="tokenExpiresAt" type="string">
+  An ISO timestamp of the time at which the token will expire.
+</ParamField>

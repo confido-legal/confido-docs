@@ -1,0 +1,127 @@
+---
+title: Initialize
+---
+
+You can initialize the fields by calling the `init()` method. Once this method is called, the sdk will emit the `initializing`, `initialized`, and/or the `init_error` [change events](/hosted-fields-js/change-events).
+
+```javascript
+window.confidoHostedFields.init(options: Options): Promise<void>;
+```
+
+You can call `init()` multiple times in the same context. Each call will trigger a new `initializing`, `initalized`, and/or `init_error` sequence. The fields will also be reloaded each time `init()` is called.
+
+## Example
+
+Example initializing the hosted fields for a Payment session.
+
+```typescript
+async function initHostedFields() {
+  const res = await getPaymentTokenFromMyBackend();
+
+  const fieldStyles = {
+    border: "none",
+    color: "rgb(26, 32, 44)",
+    "font-family":
+      '-apple-system, "system-ui", "Segoe UI", Helvetica, Arial, sans-serif',
+    "font-weight": 400,
+    height: "38px",
+    width: "100%",
+    "font-size": "16px",
+  };
+
+  window.confidoHostedFields.init({
+    paymentToken: res.paymentToken,
+    activeForm: "card",
+    fields: {
+      accountNumber: {
+        containerId: "account-number",
+        style: fieldStyles,
+      },
+      accountHolderName: {
+        containerId: "account-holder-name",
+        style: fieldStyles,
+      },
+      routingNumber: {
+        containerId: "routing-number",
+        style: fieldStyles,
+      },
+      cardNumber: {
+        containerId: "card-number",
+        style: fieldStyles,
+      },
+      cardExpirationDate: {
+        containerId: "card-exp",
+        style: fieldStyles,
+      },
+      cardSecurityCode: {
+        containerId: "card-cvv",
+        style: fieldStyles,
+      },
+    },
+  });
+}
+```
+
+## Method Params Object
+
+<ParamField body="paymentToken" type="string">
+  Payment Token returned from a `paymentSessionCreate` mutation. Required when
+  using a Payment Session type.
+</ParamField>
+
+<ParamField body="savePaymentMethodToken" type="string">
+  Token returned from a `createSavePaymentMethodToken` mutation call. Required
+  when using a Save Payment Method Session type.
+</ParamField>
+
+<ParamField body="activeForm" type="enum" required>
+  The initial active form. This can be either `card` or `ach`. The active form
+  determines which fields are loaded.
+</ParamField>
+
+export const FieldsConfig = () => (
+  <Expandable>
+    <ParamField body="containerId" type="string" required>
+      The DOM ID of the container element where this field is to be loaded.
+    </ParamField>
+    <ParamField body="style" type="object (CSSStyles)">
+      CSS styles to apply to the input tag in the iframe.
+    </ParamField>
+  </Expandable>
+);
+
+<ParamField body="fields" type="object" required>
+  Configuration for the hosted fields.
+  <Expandable>
+    <ParamField body="cardNumber" type="object">
+      Configuration for the card number field. Required when activeForm is
+      `card`
+      <FieldsConfig />
+    </ParamField>
+    <ParamField body="cardExpirationDate" type="object">
+      Configuration for the card expiration date field. Required when activeForm
+      is `card`.
+      <FieldsConfig />
+    </ParamField>
+    <ParamField body="cardSecurityCode" type="object">
+      Configuration for the card security code field. Required when activeForm
+      is `card`
+      <FieldsConfig />
+    </ParamField>
+    <ParamField body="accountNumber" type="object">
+      Field config for the account holder name field for ACH payments. Required
+      when supporting ACH payments.
+      <FieldsConfig />
+    </ParamField>
+    <ParamField body="routingNumber" type="object">
+      Field config for the routing number field for ACH payments. Required when
+      supporting ACH payments.
+      <FieldsConfig />
+    </ParamField>
+    <ParamField body="accountHolderName" type="object">
+      Field config for the account number field for ACH payments. Required when
+      supporting ACH payments.
+      <FieldsConfig />
+    </ParamField>
+  </Expandable>
+</ParamField>
