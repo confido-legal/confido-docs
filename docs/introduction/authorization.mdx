@@ -7,19 +7,22 @@ includeFeedback: false
 
 import { supportEmail } from "/snippets/variables.mdx";
 
-There are multiple types of tokens that can be used with the Confido Legal API. This page covers when each api token should be used, how to acquire the various api tokens, and other information related to Authorization.
+There are multiple token types that you will encounter. This page covers when each token should be used, how to acquire them, and other information related to authorization.
 
 The types of API tokens are:
 
--   Partner Token
--   Firm Token
--   Payment Session Token
--   Onboarding Token
+- Partner Token
+- Firm Token
+- Payment Session Token
+- Onboarding Token
 
 To use an API token, add it to your request as the `x-api-key` header.
 
 <Tip>
-Our API tokens are prefixed with some human readable information. For example, a Partner Token may start with `p_secret_sandbox_`. The `p` indicates it's a Partner Token, `secret` indicates it's a secret and should be treated as one, and `sandbox` indicates that this is for the sandbox environment.
+  Our API tokens are prefixed with some human readable information. For example,
+  a Partner Token may start with `p_secret_sandbox_`. The `p` indicates it's a
+  Partner Token, `secret` indicates it's a secret and should be treated as one,
+  and `sandbox` indicates that this is for the sandbox environment.
 </Tip>
 
 ### Partner Token
@@ -28,28 +31,30 @@ Partner tokens are generated through the Confido Legal partner portal under **se
 
 If you do not have a partner account, please reach out to **{supportEmail}** and we will get you set up.
 
-<Note>Partner tokens should never be shared with the frontend. Keep them secured on your server.</Note>
+<Note>
+  Partner tokens should never be shared with the frontend. Keep them secured on
+  your server.
+</Note>
 
 The primary use of a Partner Token is to create Firms and Firm Tokens. Below is an example partner token.
 
-```json
-{
-    "x-api-key": "p_secret_sandbox_85f5a425**************afb6b1a6"
-}
+```
+p_secret_sandbox_85f5a425**************afb6b1a6
 ```
 
 ### Firm Token
 
 Firm tokens are generated with the `createFirmApiToken` mutation or the `createFirm` mutation. This request can be made using a Partner API Token.
 
-<Note>Firm tokens should never be shared with the frontend. Keep them secured on your server.</Note>
+<Note>
+  Firm tokens should never be shared with the frontend. Keep them secured on
+  your server.
+</Note>
 
 Firm tokens are used for most requests to the Confido Legal API. Some common examples are `addPaymentLink`, `addClient`, and `addMatter`. They are also used to create Payment Session Tokens for [hosted fields](/docs/hosted-fields/starting-a-payment-session). Below is an example firm token.
 
-```json
-{
-    "x-api-key": "f_secret_sandbox_92828393***************assdj3"
-}
+```
+f_secret_sandbox_92828393***************assdj3
 ```
 
 ### Payment Session Token
@@ -58,10 +63,8 @@ Payment Session Tokens are generated with the `createPaymentToken` mutation. Thi
 
 Payment Session Tokens are a one time use token that should be used to initialize the Confido Legal javascript SDK on your frontend. These tokens are meant to be shared with your frontend code.
 
-```json
-{
-    "x-api-key": "pay_public_sandbox_31319asd**********123alskdow"
-}
+```
+pay_public_sandbox_31319asd**********123alskdow
 ```
 
 For more about Payment Sessions see the [hosted fields](/docs/hosted-fields/overview) section.
@@ -72,10 +75,8 @@ Onboarding Tokens are generated with the `createOnboardingToken` mutation. This 
 
 Onboarding Tokens are short term tokens that should be used to initialize the Confido Legal javascript SDK on your frontend. These tokens are meant to be shared with your frontend code.
 
-```json
-{
-    "x-api-key": "onboarding_public_sandbox_31319asd**********123alskdow"
-}
+```
+onboarding_public_sandbox_31319asd**********123alskdow
 ```
 
 For more about Onboarding see the [hosted fields](/docs/firm-onboarding/overview) section.

@@ -1,10 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "banner": {
-    "content": "🚀 Banner is live! [Learn more](mintlify.com)",
-    "dismissible": true
-  },
   "name": "Confido Legal Docs",
   "description": "Confido Legal is a payment platform for law firms, enabling them to accept payments online, manage client billing, and streamline financial operations.",
   "colors": {
