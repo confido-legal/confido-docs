@@ -1,6 +1,5 @@
 ---
 title: Webhook Types
-noTOC: true
 ---
 
 Make sure you configure Confido to send the webhook types you are interested in through the Partner Portal under `Settings > Webhooks`.
@@ -45,7 +44,7 @@ Sent when a disbursement is updated.
 
 ## firm.updated
 
-Sent when a firm is updated. This includes when the Firm's status changes.
+Sent when a Firm is updated. This includes when the Firm's status changes.
 
 ```json
 {
@@ -62,7 +61,7 @@ Sent when a firm is updated. This includes when the Firm's status changes.
 
 ## statement.created
 
-Emitted when a statement has been created.
+Emitted when a monthly statement has been created for a Firm.
 
 ```json
 {
@@ -181,7 +180,7 @@ Sent when a Transaction moves to FUNDS_IN_TRANSIT.
 
 ## transaction.deposited
 
-Sent when a Transaction is deposited in the firm bank account.
+Sent when a Transaction is deposited in the Firm's account.
 
 ```json
 {

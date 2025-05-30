@@ -21,8 +21,7 @@ type Disbursement = {
   metadata?: JSON;
   status: DisbursementStatus;
   url?: string;
-}
-
+};
 ```
 
 **allowedMethods: DisbursementMethod\[\]**
@@ -37,7 +36,7 @@ A list of methods that the client is allowed to use when accepting the disbursem
 
 **amount: Int**
 
-The amount to disburse to the client. If the client chooses an instant method from the payout page, the net disbursement to them will be **amount - instant\_fee**.
+The amount to disburse to the client. If the client chooses an instant method from the payout page, the net disbursement to them will be **amount - instant_fee**.
 
 **authorizedIdentities: Identity\[\]**
 
@@ -101,8 +100,7 @@ type DisbursementCreateInput = {
   matterUpsert?: MatterCreateInput;
   metadata?: JSON;
   status?: DRAFT | APPROVED;
-}
-
+};
 ```
 
 **allowedMethods**
@@ -165,4 +163,4 @@ For a full list of available query parameters, see our [GraphQL Playground](http
 
 ## Webhooks
 
-Get a webhook when a Disbursement is updated with the `disbursement.updated` webhook. Also get webhooks when a Disbursement is accepted via the `transaction.created` webhook. See the [webhooks docs](https://docs.confidolegal.com/docs/webhooks/overview)
+Get a webhook when a Disbursement is updated with the `disbursement.updated` webhook. Also get webhooks when a Disbursement is accepted via the `transaction.created` webhook. See the [webhooks docs](https://docs.confidolegal.com/docs/webhooks/configure)

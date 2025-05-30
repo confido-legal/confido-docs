@@ -6,32 +6,32 @@ Once the user has entered all their payment information, you are ready to submit
 
 To submit the sensitive data in the fields to Confido Legal, use the `submitFields()` method.
 
-For a more detailed explanation of the `submitFields()` method, see the [Reference Docs](/reference/hosted-fields-js/submit-fields).
+For a more detailed explanation of the `submitFields()` method, see the [Reference Docs](/hosted-fields-js/submit-fields).
 
 ```javascript
-window.gravityLegal.submitFields(async (err) => {
-    if (err) {
-        // There was an error with submitting the field
-        // data. We should pause here, and let the user
-        // fix the issue.
-        return;
-    }
+window.confidoHostedFields.submitFields(async (err) => {
+  if (err) {
+    // There was an error with submitting the field
+    // data. We should pause here, and let the user
+    // fix the issue.
+    return;
+  }
 
-    // Field data was submitted successfully.
-    // Now we can finish off the payment from
-    // our backend.
-    const otherFormData = gatherOtherFormData();
+  // Field data was submitted successfully.
+  // Now we can finish off the payment from
+  // our backend.
+  const otherFormData = gatherOtherFormData();
 
-    const result = await fetch("/my-api/payment-session-complete", {
-        method: "post",
-        body: JSON.stringify({
-            paymentToken,
-            ...otherFormData,
-        }),
-    });
+  const result = await fetch("/my-api/payment-session-complete", {
+    method: "post",
+    body: JSON.stringify({
+      paymentToken,
+      ...otherFormData,
+    }),
+  });
 
-    // The result from your backend
-    console.log(result);
+  // The result from your backend
+  console.log(result);
 });
 ```
 
@@ -43,12 +43,12 @@ Call the `paymentSessionComplete` mutation from your server when you are using a
 
 ```graphql
 mutation PaymentSessionComplete($input: PaymentSessionCompleteInput!) {
-    paymentSessionComplete(input: $input) {
-        status
-        transactions {
-            amountProcessed
-        }
+  paymentSessionComplete(input: $input) {
+    status
+    transactions {
+      amountProcessed
     }
+  }
 }
 ```
 
@@ -56,12 +56,12 @@ Example mutation variables.
 
 ```typescript
 const variables = {
-    input: {
-        amount: 1500, // amount in cents
-        payerEmail,
-        paymentMethod, // sent from the browser, can be found on the Hosted Fields SDK state
-        paymentToken, // the same paymentToken you used to init the fields
-    },
+  input: {
+    amount: 1500, // amount in cents
+    payerEmail,
+    paymentMethod, // sent from the browser, can be found on the Hosted Fields SDK state
+    paymentToken, // the same paymentToken you used to init the fields
+  },
 };
 ```
 
@@ -70,15 +70,17 @@ const variables = {
 Call the `completeSavePaymentMethod` mutation from your server when you are saving a payment method for later use.
 
 ```graphql
-mutation CompleteSavePaymentMethod($input: CompleteSavePaymentMethodSessionInput!) {
-    completeSavePaymentMethod(input: $input) {
-        paymentMethod
-        payerName
-        id
-        lastFour
-        status
-        type
-    }
+mutation CompleteSavePaymentMethod(
+  $input: CompleteSavePaymentMethodSessionInput!
+) {
+  completeSavePaymentMethod(input: $input) {
+    paymentMethod
+    payerName
+    id
+    lastFour
+    status
+    type
+  }
 }
 ```
 
@@ -86,13 +88,13 @@ Example variables
 
 ```typescript
 const variables = {
-    input: {
-        payerEmail,
-        payerName,
-        payerZip,
-        paymentMethod, // sent from the browser
-        savePaymentMethodToken, // the same token you used to init the fields
-    },
+  input: {
+    payerEmail,
+    payerName,
+    payerZip,
+    paymentMethod, // sent from the browser
+    savePaymentMethodToken, // the same token you used to init the fields
+  },
 };
 ```
 

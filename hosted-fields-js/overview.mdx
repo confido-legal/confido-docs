@@ -2,7 +2,7 @@
 title: Overview
 ---
 
-This is a reference guide for the Hosted Fields SDK. The SDK is a javascript file which should be loaded via a `script` tag on any page you want to load our hosted fields. Once the script loads the `window` object will have a `window.gravityLegal` object with the methods documented here. The `gravityLegal` object is a singleton. This means you can only having one instance of hosted fields per `window`.
+This is a reference guide for the Hosted Fields SDK. The SDK is a javascript file which should be loaded via a `script` tag on any page you want to load our hosted fields. Once the script loads the `window` object will have a `window.confidoHostedFields` object with the methods documented here. The `gravityLegal` object is a singleton. This means you can only having one instance of hosted fields per `window`.
 
 If you are looking to get started quickly, see the Hosted Fields [Quick Start Guide](/docs/hosted-fields/overview).
 
@@ -24,9 +24,9 @@ The script will use `window.postMessage` to post a message when it has finished 
 
 ```typescript
 const myListener = (e) => {
-    if (e.data === "confido_hosted_fields_script_loaded") {
-        console.log("sdk is loaded!");
-    }
+  if (e.data === "confido_hosted_fields_script_loaded") {
+    console.log("sdk is loaded!");
+  }
 };
 
 window.addEventListener("message", myListener);

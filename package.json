@@ -1,0 +1,15 @@
+{
+  "name": "@confido/docs",
+  "version": "0.0.0",
+  "description": "Developer documentation for confido.legal",
+  "scripts": {
+    "dev": "mintlify dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/confido-legal/docs.git"
+  },
+  "devDependencies": {
+    "mintlify": "^4.0.560"
+  }
+}

@@ -1,0 +1,213 @@
+---
+title: The State Object
+---
+
+The state object represents the internal state of the fields. The current state is included on every [change event](/hosted-fields-js/change-events).
+
+You can also always call the `getState()` method to retrieve the current state of the fields.
+
+```javascript
+const currentState = window.confidoHostedFields.getState();
+```
+
+<Panel>
+ Example
+
+```typescript
+{
+  activeForm: 'card',
+  cardData: {
+      bin: '424242',
+      cardType: 'credit',
+      brand: 'visa',
+  },
+  env: 'sandbox',
+  fields: {
+      cardNumber: {
+          containerId: 'card-number',
+          loading: false,
+          error: null,
+      },
+      cardExpirationDate: {
+          containerId: 'card-expiration-date',
+          loading: false,
+          error: null,
+      },
+      cardSecurityCode: {
+          containerId: 'card-security-code',
+          loading: false,
+          error: null,
+      },
+      accountNumber: {
+          containerId: 'account-number',
+          loading: false,
+          error: null,
+      },
+      routingNumber: {
+          containerId: 'routing-number',
+          loading: false,
+          error: null,
+      },
+      accountHolderName: {
+          containerId: 'account-holder-name',
+          loading: false,
+          error: null,
+      },
+  },
+  initializing: false,
+  isSubmitting: false,
+  paymentLink?: PaymentLink;
+  paymentMethod?: PaymentMethod;
+  sessionType: SessionType;
+  surcharging: {
+      active: true,
+      willBeApplied: true,
+  }
+```
+
+</Panel>
+
+## Props
+
+<ParamField body="activeForm" type="string" required>
+  The current active form. This can be either `card` or `ach`. The active form
+  determines which fields are loaded.
+</ParamField>
+
+<ParamField body="cardData" type="object">
+  Information about the card number that was entered. This is only populated
+  when the `activeForm` is `card` and the card number field has been filled.
+  <Expandable>
+    <ParamField body="bin" type="string">
+      The first six digits of the card number that was entered.
+    </ParamField>
+    <ParamField body="cardType" type="enum">
+      The type of card that was entered. This can be either `credit` or `debit`.
+    </ParamField>
+    <ParamField body="brand" type="enum">
+      The card brand that was entered, such as `visa`, `mastercard`, etc.
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="env" type="enum" required>
+  The processing environment. This can be either `sandbox` or `production`.
+</ParamField>
+
+export const FieldState = () => (
+  <Expandable>
+    <ParamField body="containerId" type="string" required>
+      The ID of the container element where the card number field is rendered.
+    </ParamField>
+    <ParamField body="loading" type="boolean">
+      `true` if the field is still loading.
+    </ParamField>
+    <ParamField body="error" type="Error">
+      This will be set when the field has a validation error.
+    </ParamField>
+  </Expandable>
+);
+
+<ParamField body="fields" type="object" required>
+  The state of the hosted fields.
+  <Expandable>
+    <ParamField body="cardNumber" type="FieldState">
+      The state of the card number field.
+      <FieldState />
+    </ParamField>
+    <ParamField body="cardExpirationDate" type="FieldState">
+      The state of the card expiration date field.
+      <FieldState />
+    </ParamField>
+    <ParamField body="cardSecurityCode" type="FieldState">
+      The state of the card security code field.
+      <FieldState />
+    </ParamField>
+    <ParamField body="accountNumber" type="FieldState">
+      The state of the account number field.
+      <FieldState />
+    </ParamField>
+    <ParamField body="routingNumber" type="FieldState">
+      The state of the routing number field.
+      <FieldState />
+    </ParamField>
+    <ParamField body="accountHolderName" type="FieldState">
+      The state of the account holder name field.
+      <FieldState />
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="initializing" type="boolean" required>
+  `true` when the sdk is still initializing.
+</ParamField>
+
+<ParamField body="isSubmitting" type="boolean" required>
+  `true` after `sdk.submitFields()` is called and before the fields are done
+  submitting their data.
+</ParamField>
+
+<ParamField body="paymentLink" type="object">
+  The payment link object, if applicable.
+  <Expandable>
+    <ParamField body="id" type="string" required>
+      The unique identifier for the payment link.
+    </ParamField>
+    <ParamField body="amounts" type="object[]" required>
+      The amounts associated with the payment link.
+      <Expandable>
+        <ParamField body="amount" type="number" required>
+          The amount in cents.
+        </ParamField>
+        <ParamField body="bankAccountCat" type="string" required>
+          The category of the bank account, e.g., `trust`, `operating`.
+        </ParamField>
+      </Expandable>
+    </ParamField>
+    <ParamField body="maxAchPayment" type="number" required>
+      The maximum ACH payment amount in cents. You should use this to show a
+      warning if your amount is over this limit.
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="paymentMethod" type="string">
+  This indicates the payment method for the transaction. When `activeForm` is
+  `ach`, this will be `ACH`. When `activeForm` is `card`, this will be either
+  `CREDIT` or `DEBIT` depending on the card type. Possible values are: `ACH` |
+  `CREDIT` | `DEBIT`
+</ParamField>
+
+<ParamField body="sessionType" type="string" required>
+  The type of session. Possible values are: `payment` | `save_payment_method`
+</ParamField>
+
+<ParamField body="surcharging" type="object" required>
+  Surcharging information. This is only applicable when the `activeForm` is
+  `card`. It provides details about whether surcharging is active, the rate, and
+  whether it will be applied.
+  <Expandable>
+    <ParamField body="active" type="boolean" required>
+      Whether surcharging is active.
+    </ParamField>
+    <ParamField body="willBeApplied" type="boolean" required>
+      Whether the surcharge rate will be applied or not. If surcharging is
+      enabled by the firm, this will show as `true` when the `cardNumber` field
+      has been filled out and the `bin_loaded` event has been produced by the
+      form.
+    </ParamField>
+    <ParamField body="rate" type="number">
+      The surcharge rate that will be multiplied by the amount and added to the
+      payment.
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="initError" type="object">
+  Set when there is an initialization error.
+  <Expandable>
+    <ParamField body="message" type="string" required>
+      The error message describing the initialization error.
+    </ParamField>
+  </Expandable>
+</ParamField>

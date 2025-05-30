@@ -2,8 +2,6 @@
 title: Create an Onboarding Token
 ---
 
-import { Note } from "@components/ui/note";
-
 To render the form, you will need a public Onboarding Token. The token is used by onboarding.js for authorization and scopes the requests to the Confido Firm that it was created for.
 
 Onboarding Tokens can be shared with the client and are valid for 24 hours. If a token expires, you will need to create a new one and re-render the form.
@@ -25,7 +23,7 @@ mutation CreateOnboardingToken {
 }
 ```
 
-<Note type="info">
+<Note>
     This is a Firm level request, so you must use a Firm API Token on the `x-api-key` header. This tells us which Firm
     you want to create the token for.
 </Note>
@@ -44,7 +42,7 @@ mutation CreateFirm() {
 }
 ```
 
-<Note type="hint">
+<Note>
     You can find detailed information about all queries and mutations in our [GraphQL
     Playground](https://api.sandbox.gravity-legal.com/v2).
 </Note>

@@ -2,19 +2,19 @@
 title: Overview
 ---
 
-A firm represents an actual business with an EIN number. For example, say there is a law firm called Nelson & Murdock. They have 4 physical locations in 2 different states. They share one operating account between all locations but have 2 different trust accounts, one in each state they operate. Nelson & Murdock would be represented as a firm in Confido. Under that firm would be 3 bank accounts, 1 operating, 2 trust.
+A Firm represents an actual business with an EIN number. For example, say there is a law firm called Nelson & Murdock. They have 4 physical locations in 2 different states. They share one operating account between all locations but have 2 different trust accounts, one in each state they operate. Nelson & Murdock would be represented as a Firm in Confido. Under that Firm would be 3 Bank Accounts, 1 operating, 2 trust.
 
 Since the Confido Legal API handles financial transactions, regulations require that a certain amount of due diligence is performed before we allow businesses to use our platform. We call this process Firm Onboarding.
 
-During Firm Onboarding, we collect financial information about the business and its owners. This information then goes through underwriting to validate the legitimacy and financial strength of the firm.
+During Firm Onboarding, we collect financial information about the business and its owners. This information then goes through underwriting to validate the legitimacy and financial strength of the Firm.
 
-Firms fill out the onboarding form through our [onboarding.js](/reference/onboarding-js/overview) form or the Confido Legal UI. Once a Firm has been approved, they can start moving money.
+Firms fill out the onboarding form through our [onboarding.js](/onboarding-js/overview) form or the Confido Legal UI. Once a Firm has been approved, they can start moving money.
 
 ## Timeline
 
-During onboarding, the `firm.status` field will go through the following values. A `firm.updated` [webhook](/docs/webhooks/overview) will be sent each time the `firm.status` changes.
+During onboarding, the `firm.status` field will go through the following values. A `firm.updated` [webhook](/docs/webhooks/configure) will be sent each time the `firm.status` changes.
 
-`CREATED` -> The firm was created but there haven't been any edits to the application yet.
+`CREATED` -> The Firm was created but there haven't been any edits to the application yet.
 
 `APP_IN_DRAFT` -> The application has been updated and is currently being filled out.
 
@@ -22,9 +22,9 @@ During onboarding, the `firm.status` field will go through the following values.
 
 `APP_IN_REVIEW` -> The application is currently in under review.
 
-`ACTIVE` -> The firm has been approved and is ready to start processing payments.
+`ACTIVE` -> The Firm has been approved and is ready to start processing payments.
 
-`INACTIVE` -> The firm is no longer set up to process payments.
+`INACTIVE` -> The Firm is no longer set up to process payments.
 
 ## Developing in Sandbox
 
@@ -32,32 +32,32 @@ In our sandbox environment, the following methods can be used to set up firms de
 
 ### Skip onboarding flow
 
-If you are utilizing the `createFirm` mutation, the `mockOnboarding` input parameter can be used to transition the firm directly into the `ACTIVE` status with one default operating and one default trust bank account. This is useful when you are developing payment features and don't want to hassle with "onboarding" the Firm.
+If you are utilizing the `createFirm` mutation, the `mockOnboarding` input parameter can be used to transition the Firm directly into the `ACTIVE` status with one default operating and one default trust bank account. This is useful when you are developing payment features and don't want to hassle with "onboarding" the Firm.
 
 ### Trigger via the Partner Portal
 
-Through the Partner Portal, you can update the firm status via the firm settings page. Click `Firms` on the navbar and then click on the firm you would like to edit.
+Through the Partner Portal, you can update the Firm status via the Firm settings page. Click `Firms` on the navbar and then click on the Firm you would like to edit.
 
 ### Trigger via a Firm Admin
 
-If you have created a Firm Admin user for the firm, you can log in as that user and update the status of the firm through the Application or Settings page.
+If you have created a Firm Admin user for the Firm, you can log in as that user and update the status of the Firm through the Application or Settings page.
 
 ### Trigger via the GraphQL API
 
 If you are looking to step through the statuses via the GraphQL API, we have created a series of `sandboxOnly` functions for the different steps of the onboarding flow.
 
-`sandboxOnlyFillOnboardingData` -> Fills the application with mock data, including one operating and one trust bank account. This will not overwrite fields of the application that have already been filled out (which can be useful to create a firm with more then one trust account).
+`sandboxOnlyFillOnboardingData` -> Fills the application with mock data, including one operating and one trust bank account. This will not overwrite fields of the application that have already been filled out (which can be useful to create a Firm with more then one trust account).
 
-`sandboxOnlySubmitOnboardingData` -> Transitions the firm to the `APP_SUBMITTED` status. Under the hood, this will first call `sandboxOnlyFillOnboardingData` so this function can be called when the firm status is either `CREATED` or `APP_IN_DRAFT`.
+`sandboxOnlySubmitOnboardingData` -> Transitions the Firm to the `APP_SUBMITTED` status. Under the hood, this will first call `sandboxOnlyFillOnboardingData` so this function can be called when the Firm status is either `CREATED` or `APP_IN_DRAFT`.
 
-`sandboxOnlySendFirmToReview` -> Transitions the firm to the `APP_IN_REVIEW` status. Under the hood, this will first call `sandboxOnlySubmitOnboardingData` so this function can be called when the firm status is `CREATED`, `APP_IN_DRAFT`, or `APP_SUBMITTED`.
+`sandboxOnlySendFirmToReview` -> Transitions the Firm to the `APP_IN_REVIEW` status. Under the hood, this will first call `sandboxOnlySubmitOnboardingData` so this function can be called when the Firm status is `CREATED`, `APP_IN_DRAFT`, or `APP_SUBMITTED`.
 
-`sandboxOnlyActivateFirm` -> Transitions the firm to the `ACTIVE` status. Under the hood, this will first call `sandboxOnlySubmitOnboardingData` so this function can be called when the firm status is `CREATED`, `APP_IN_DRAFT`, `APP_SUBMITTED`, or `APP_IN_REVIEW`. It will error out if the firm is already `ACTIVE` or `INACTIVE`.
+`sandboxOnlyActivateFirm` -> Transitions the Firm to the `ACTIVE` status. Under the hood, this will first call `sandboxOnlySubmitOnboardingData` so this function can be called when the Firm status is `CREATED`, `APP_IN_DRAFT`, `APP_SUBMITTED`, or `APP_IN_REVIEW`. It will error out if the Firm is already `ACTIVE` or `INACTIVE`.
 
 ## Production
 
-To onboard firms in production, your team can utilize our [onboarding.js](/reference/onboarding-js/overview) form or have the a firm user login to the Confido Legal UI to complete the form.
+To onboard firms in production, your team can utilize our [onboarding.js](/onboarding-js/overview) form or have the a Firm user login to the Confido Legal UI to complete the form.
 
 ### Timeline
 
-When onboarding firms in the production environment, the typical timeline from initial submission of the firm application to the firm being able to accept payments is 2-3 business days. Firms without any underwriting issues that sign the required documents quickly can sometimes be onboarded in under 24 hours.
+When onboarding firms in the production environment, the typical timeline from initial submission of the Firm application to the Firm being able to accept payments is 2-3 business days. Firms without any underwriting issues that sign the required documents quickly can sometimes be onboarded in under 24 hours.

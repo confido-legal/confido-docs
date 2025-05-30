@@ -7,12 +7,10 @@ Use Sign Up Links when your users do not already have an existing Confido Legal 
 
 With Sign Up Links, you will preemptively create a new Firm using the `createFirm` mutation and then create a unique sign up link where you will direct your user. When the user signs up using this link, they will be added as an admin to the Firm that you previously created.
 
-import { Note } from "@components/ui/note";
-
-<Note type="info">
+<Info>
     For security reasons, Sign Up Links are short-lived, one-time-use links. They are good for 20 minutes and include an
     `expiresAt` field for your convenience.
-</Note>
+</Info>
 
 ## Create a Firm
 
@@ -41,11 +39,11 @@ mutation CreateFirm($input: CreateFirmInput!) {
 
 Once the Firm has been created, save the returned Firm API Token in your database. You will use this in all subsequent requests for the Firm.
 
-<Note type="hint">
+<Tip>
     The Firm can be created at any time. For instance, you could create a Firm for each account in your application in
     one bulk operation. Then later, when the user is ready, generate a Sign Up Link using the `createFirmSignUpLink`
     mutation.
-</Note>
+</Tip>
 
 If you know that you are going to immediately direct your user to the Sign Up Link after creating the Firm, then you can save yourself a network request by asking for the `signUpLink` field in your `createFirm` query.
 

@@ -5,10 +5,8 @@ includeTOC: true
 
 Use Connect when your user already has an existing Confido Legal account.
 
-import { Note } from '@components/ui/note';
-
-<Note type='info'>
-For users without a Confido Legal account, use [Sign Up Links](/docs/firm-onboarding/sign-up-links) or [Onboarding.js](/reference/onboarding-js/overview).
+<Note>
+    For users without a Confido Legal account, use [Sign Up Links](/docs/firm-onboarding/sign-up-links) or [Onboarding.js](/onboarding-js/overview).
 </Note>
 
 With Connect, you'll direct users to a unique Connect URL where they will authorize your application. Upon authorization, they will be redirected back to your configured Callback URL with a one time use `code` that can be exchanged for a Firm API Token. You'll then store this token in your database to use in subsequent requests to manage the Firm through the API.

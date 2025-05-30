@@ -1,0 +1,22 @@
+{
+  "extensions": {
+    "recommendations": ["esbenp.prettier-vscode"],
+  },
+  "folders": [
+    {
+      "path": ".",
+    },
+  ],
+  "settings": {
+    "debug.javascript.terminalOptions": {
+      "skipFiles": ["<node_internals>/**"],
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.occurrencesHighlight": "multiFile",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "workbench.colorCustomizations": {
+      "statusBar.background": "#d11eb9",
+    },
+  },
+}
