@@ -1,3 +1,7 @@
+---
+title: "Bulk Create Disbursements"
+---
+
 To create multiple disbursements at once, use the bulk creation process. This involves invoking a GraphQL mutation that initiates a background job. The mutation will return a jobId, which you can use to track the job’s status.
 
 Each disbursement created as part of the job will trigger a disbursement.created webhook. You can either listen for those webhooks or poll the job status endpoint to retrieve results.

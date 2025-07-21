@@ -51,7 +51,8 @@
             "group": "Send Money (Disbursements)",
             "pages": [
               "docs/send-money/disbursements",
-              "docs/send-money/expiration"
+              "docs/send-money/expiration",
+              "docs/send-money/bulk-disbursements"
             ]
           },
           {
