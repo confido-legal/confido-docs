@@ -1,0 +1,72 @@
+To create multiple disbursements at once, use the bulk creation process. This involves invoking a GraphQL mutation that initiates a background job. The mutation will return a jobId, which you can use to track the job’s status.
+
+Each disbursement created as part of the job will trigger a disbursement.created webhook. You can either listen for those webhooks or poll the job status endpoint to retrieve results.
+
+## Step 1: Start the Bulk Creation Job
+
+Use the following mutation to initiate the bulk disbursement creation job:
+
+```graphql
+mutation DisbursementsCreateBulk($createParams: [DisbursementCreateInput!]!) {
+  disbursementsCreateBulk(createParams: $createParams) {
+    jobId
+    jobStatus
+  }
+}
+```
+
+**Example variables:**
+
+```json
+{
+  "createParams": [
+    {
+      "id": "my_generated_uuid",
+      "amount": 100,
+      "authorizedIdentities": [
+        {
+          "type": "EMAIL",
+          "value": "myemail@example.com"
+        }
+      ],
+      "fundingAccountId": "the_bank_account_id"
+    }
+  ]
+}
+```
+
+<Tip>
+  You can provide a client-generated id (e.g. a UUID) for each disbursement in
+  the createParams. This id will become the disbursement.id, allowing you to
+  associate results with records in your own system for better traceability.
+</Tip>
+
+The response will include a jobId and initial jobStatus.
+
+## Step 2: Check job status
+
+To monitor the progress of the bulk disbursement job, use this query:
+
+```graphql
+query JobStatus($jobId: ID!) {
+  jobStatus(jobId: $jobId) {
+    status
+    errors {
+      index
+      message
+    }
+    results {
+      id
+      disbursementId
+      status
+    }
+  }
+}
+```
+
+Pass in the jobId returned by the mutation to fetch the current status and any errors or results associated with the job.
+
+## Additional notes
+
+- Each successful disbursement will emit a disbursement.created webhook event.
+- Errors encountered during job execution will be returned in the job status results array, indexed by the `disbursementId` originally passed in the createParams array.
