@@ -152,7 +152,34 @@ Sent when a new Transaction is created.
 {
   "data": {
     "transaction": {
-      "id": "string"
+        "id": "string",
+        "achReturnCode": "string" | null;
+        "achReturnReason": "string" | null;
+        "aggregatePaymentLink": { id: "<aggregate_paylink_id>" } | null;
+        "amountProcessed": "int";
+        "amountRefunded": "int";
+        "bankAccount": { "id": "<bank_account_id>" };
+        "cardBrand": "string" | null;
+        "client": { "id": "<client_id>" } | null;
+        "createdOn": "Date";
+        "disbursement": { id: "<disbursement_id>" } | null;
+        "disbursementAmounts": "DisbursementAmounts" | null;
+        "errorMessage": "string" | null;
+        "firm": { id: "<firm_id>" };
+        "lastFour": "string" | null;
+        "matter": { id: "string" } | null;
+        "payerEmail": "string" | null;
+        "payerName": "string" | null;
+        "payerNotes": "string" | null;
+        "paymentMethod": TransactionPaymentMethod;
+        "payment": { id: "string" } | null;
+        "paymentLink": { id: "string" } | null;
+        "settledOn": "Date" | null;
+        "standingLink": { id: "string" } | null;
+        "status_v2": "PaymentTxnStatus2";
+        "storedPaymentMethod": { id: "string" } | null;
+        "subscription": { id: "string" } | null;
+        "type": PaymentTxnType;
     }
   },
   "type": "transaction.created",
