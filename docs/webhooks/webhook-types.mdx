@@ -146,46 +146,40 @@ Emitted when a Stored Payment Method is updated.
 
 ## transaction.created
 
-Sent when a new Transaction is created.
+Sent when a new Transaction is created. You find the full data typing in our [API Sandbox](https://api.sandbox.gravity-legal.com/) under root > Query > transaction.
 
-```json
-{
-  "data": {
-    "transaction": {
-        "id": "string",
-        "achReturnCode": "string" | null;
-        "achReturnReason": "string" | null;
-        "aggregatePaymentLink": { id: "<aggregate_paylink_id>" } | null;
-        "amountProcessed": "int";
-        "amountRefunded": "int";
-        "bankAccount": { "id": "<bank_account_id>" };
-        "cardBrand": "string" | null;
-        "client": { "id": "<client_id>" } | null;
-        "createdOn": "Date";
-        "disbursement": { id: "<disbursement_id>" } | null;
-        "disbursementAmounts": "DisbursementAmounts" | null;
-        "errorMessage": "string" | null;
-        "firm": { id: "<firm_id>" };
-        "lastFour": "string" | null;
-        "matter": { id: "string" } | null;
-        "payerEmail": "string" | null;
-        "payerName": "string" | null;
-        "payerNotes": "string" | null;
-        "paymentMethod": TransactionPaymentMethod;
-        "payment": { id: "string" } | null;
-        "paymentLink": { id: "string" } | null;
-        "settledOn": "Date" | null;
-        "standingLink": { id: "string" } | null;
-        "status_v2": "PaymentTxnStatus2";
-        "storedPaymentMethod": { id: "string" } | null;
-        "subscription": { id: "string" } | null;
-        "type": PaymentTxnType;
-    }
-  },
-  "type": "transaction.created",
-  "firmId": "<firm_id>",
-  "eventId": "<event_id>"
-}
+```ts
+{transaction: {
+  id: string;
+  achReturnCode: string | null;
+  achReturnReason: string | null;
+  aggregatePaymentLink: { id: string } | null;
+  amountProcessed: number;
+  amountRefunded: number;
+  bankAccount: { id: string };
+  cardBrand: string | null;
+  client: { id: string } | null;
+  createdOn: Date;
+  disbursement: { id: string } | null;
+  disbursementAmounts: DisbursementAmounts | null;
+  errorMessage: string | null;
+  firm: { id: string };
+  lastFour: string | null;
+  matter: { id: string } | null;
+  payerEmail: string | null;
+  payerName: string | null;
+  payerNotes: string | null;
+  paymentMethod: TransactionPaymentMethod;
+  payment: { id: string } | null;
+  paymentLink: { id: string } | null;
+  settledOn: Date | null;
+  standingLink: { id: string } | null;
+  status_v2: PaymentTxnStatus2;
+  storedPaymentMethod: { id: string } | null;
+  subscription: { id: string } | null;
+  type: PaymentTxnType;
+  }
+};
 ```
 
 ## transaction.funds_in_transit
