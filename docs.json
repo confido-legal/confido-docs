@@ -68,6 +68,8 @@
             "pages": [
               "docs/payments-lifecycle/overview",
               "docs/payments-lifecycle/voids-and-refunds",
+              "docs/payments-lifecycle/voids",
+              "docs/payments-lifecycle/refunds",
               "docs/payments-lifecycle/ach-returns"
             ]
           },
@@ -132,10 +134,6 @@
       {
         "tab": "Examples",
         "pages": ["examples/legal-wave", "examples/code-sandbox"]
-      },
-      {
-        "tab": "Migrations",
-        "pages": ["migrations/voids-and-refunds/voids-and-refunds"]
       }
     ],
     "global": {

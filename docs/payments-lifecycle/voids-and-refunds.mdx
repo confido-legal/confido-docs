@@ -1,8 +1,13 @@
 ---
-title: Voids and Refunds
+title: Voids and Refunds (Deprecated)
 ---
 
 ### Voids
+
+<Warning>
+  This document explains a deprecated process. See the Void and Refund pages for
+  the updated flow.
+</Warning>
 
 After a successful payment has been made, there is a short period in which it can be voided using the `voidTransaction` mutation. This period depends on the payment method used when processing the payment.
 
@@ -14,7 +19,8 @@ After a successful payment has been made, there is a short period in which it ca
 The `Transaction` object has a `canVoid` boolean that indicates whether or not the transaction can be voided.
 
 <Warning>
-    Payments on an [Aggregate Payment Link](/docs/payment-vehicles/aggregate-payment-links) can't be voided.
+  Payments on an [Aggregate Payment
+  Link](/docs/payment-vehicles/aggregate-payment-links) can't be voided.
 </Warning>
 
 ### Refunds
