@@ -132,6 +132,10 @@
       {
         "tab": "Examples",
         "pages": ["examples/legal-wave", "examples/code-sandbox"]
+      },
+      {
+        "tab": "Migrations",
+        "pages": ["migrations/voids-and-refunds-migration"]
       }
     ],
     "global": {

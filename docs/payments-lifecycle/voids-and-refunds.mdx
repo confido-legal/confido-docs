@@ -4,29 +4,53 @@ title: Voids and Refunds
 
 ### Voids
 
-After a successful payment has been made, there is a short period in which it can be voided using the `voidTransaction` mutation. This period depends on the payment method used when processing the payment.
+After a successful payment has been made, there is a short period in which it can be voided using the `transactionVoid` mutation. This period depends on the firm settings and payment method used when processing the payment.
 
-| Payment Method | Cutoff Time (Central Time) |
-| -------------- | -------------------------- |
-| Card Payment   | 10:30 PM                   |
-| Ach Payment    | 12:30 PM & 9:00 PM         |
+| Payment Method | Cutoff Time (Central Time) | _Legacy Cutoff Time (Central Time)_ |
+| -------------- | -------------------------- | ----------------------------------- |
+| Card Payment   | 11:00 PM                   | _10:30 PM_                          |
+| Ach Payment    | 11:00 PM                   | _12:30 PM & 9:00 PM_                |
 
 The `Transaction` object has a `canVoid` boolean that indicates whether or not the transaction can be voided.
 
+#### Void Details
+
+Before voiding a transaction, you can use the `transactionVoidDetails` mutation to see which transactions will be affected. This is particularly useful because a single payment may create multiple transactions, and voiding requires canceling all related transactions together.
+
 <Warning>
-    Payments on an [Aggregate Payment Link](/docs/payment-vehicles/aggregate-payment-links) can't be voided.
+  Payments on an [Aggregate Payment
+  Link](/docs/payment-vehicles/aggregate-payment-links) can't be voided.
 </Warning>
 
 ### Refunds
 
-After a successful payment has settled, the transaction can be refunded at any time using the `refundTransaction` mutation. This mutation also contains an optional `amount` input that can be defined to make a partial refund for a specific transaction. An error will be thrown if you attempt to refund more then the original amount of the transaction.
+After a successful payment has settled, the transaction can be refunded at any time using the `transactionRefund` mutation. This mutation also contains an optional `amount` input that can be defined to make a partial refund for a specific transaction. An error will be thrown if you attempt to refund more then the original amount of the transaction.
 
 The `Transaction` object has a `canRefund` boolean that indicates whether or not the transaction can be refunded. This is based on the expected settlement time of the transaction.
 
+### Asynchronous Processing
+
+Refund and void requests now support asynchronous processing to accommodate varying financial institution response times:
+
+1. **Immediate Response:** We wait up to 30 seconds for a response from the financial institution.
+2. **Pending Status:** If the request is still processing, we return a response with status `AWAITING_RESULT`
+3. **Completion Handling:**
+   - If completed within 30 seconds: You receive the original and new refund or void transactions
+   - If still pending: You receive a refund or void request in the `AWAITING_RESULT` status
+4. **Status Updates:** Webhooks notify you when transaction statuses change to refunded or voided
+5. **Request Tracking:** The `transaction` query includes a `refundRequests` and `voidRequests` field showing status and date for each refund request. The `status_v2` field will also correctly reflect refunds or voids.
+
 ### Void or Refund
 
-For convenience, we have also added a `voidOrRefundTransaction` mutation. However, we do not allow partial refunds when using this mutation.
+For convenience, we have also added a `transactionVoidOrRefund` mutation. However, we do not allow partial voids/refunds when using this mutation.
+
+### Surcharging
+
+When voiding or refunding transactions that include surcharges, the system automatically handles the surcharge amounts appropriately:
+
+- **Voids**: Any surcharge amounts applied to the original transaction are automatically voided along with the base transaction amount
+- **Refunds**: Surcharge amounts are automatically refunded proportionally based on the refund amount
 
 ### Notes
 
-It is possible for both `canVoid` and `canRefund` to be false. This occurs when the money is in transit.
+It is possible for both `canVoid` and `canRefund` to be false. This may occur when the money is in transit.
