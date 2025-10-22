@@ -1,0 +1,196 @@
+---
+title: Voids and Refunds Migration
+---
+
+Due to a change in our sponsor bank to improve our onboarding process, it is now possible for refunds and voids to take more than 60 seconds to complete. Because of this, we have updated our void and refund mutations to accommodate the asynchronous process.
+
+## What's Changed
+
+The following three new mutations have been added to replace the legacy synchronous mutations:
+
+- `transactionRefund` (replaces `refundTransaction`)
+- `transactionVoid` (replaces `voidTransaction`)
+- `transactionVoidOrRefund` (replaces `voidOrRefundTransaction`)
+
+**Key Changes:**
+
+- Operations are now asynchronous and may take longer to complete
+- New response structure separates request status from transaction results
+- Transaction lists in responses are nullable and may be empty initially
+- Status checking is required to determine operation completion
+
+## Migration Timeline
+
+<Warning>
+  All refunds and voids for firms onboarded using the new sponsor bank will
+  return a _Not implemented_ error.
+</Warning>
+
+## Implementation Guide
+
+### Refunds
+
+##### Legacy Mutation (Deprecated)
+
+```graphql
+mutation LegacyRefundTransaction($input: RefundTransactionInput!) {
+  refundTransaction(input: $input) {
+    id
+    amount
+    amountRefunded
+    errorMessage
+    surchargeAmount
+    surchargeAmountRefunded
+  }
+}
+```
+
+##### New Mutation
+
+```graphql
+mutation TransactionRefund($input: TransactionRefundInput!) {
+  transactionRefund(input: $input) {
+    refundRequest {
+      id
+      status
+      errorMessage
+    }
+    refundTransactions {
+      id
+      amountProcessed
+      amountRefunded
+      errorMessage
+      surchargeAmount
+      surchargeAmountRefunded
+    }
+  }
+}
+```
+
+**⚠️ Important:** The `refundTransactions` list is **nullable** and may be empty initially for asynchronous operations.
+
+**Recommended Implementation Pattern:**
+
+1. Check `refundRequest.status` first:
+   - `SUCCESS`: Refund completed, check `refundTransactions` for results
+   - `AWAITING_RESULT`: Refund is processing, listen for a `transaction.refunded` or `transaction.partially_refunded` webhook
+   - `FAILED`: Check `refundRequest.errorMessage` for details
+2. If status is `AWAITING_RESULT`, you'll need to listen to webhooks to get the final result
+
+### Voids
+
+##### Legacy Mutation (Deprecated)
+
+```graphql
+mutation LegacyVoidTransaction($input: VoidTransactionInput!) {
+  voidTransaction(input: $input) {
+    id
+    amount
+    amountVoided
+    errorMessage
+    surchargeAmount
+    surchargeAmountVoided
+  }
+}
+```
+
+##### New Mutation
+
+```graphql
+mutation TransactionVoid($input: TransactionVoidInput!) {
+  transactionVoid(input: $input) {
+    voidRequest {
+      id
+      status
+      errorMessage
+    }
+    voidTransactions {
+      id
+      amountProcessed
+      amountVoided
+      errorMessage
+      surchargeAmount
+      surchargeAmountVoided
+    }
+  }
+}
+```
+
+**⚠️ Important:** The `voidTransactions` list is **nullable** and may be empty initially for asynchronous operations.
+
+**Recommended Implementation Pattern:**
+
+1. Check `voidRequest.status` first:
+   - `SUCCESS`: Void completed, check `voidTransactions` for results
+   - `AWAITING_RESULT`: Void is processing, listen for a `transaction.voided` webhook
+   - `FAILED`: Check `voidRequest.errorMessage` for details
+2. If status is `AWAITING_RESULT`, you'll need to listen to webhooks to get the final result
+
+### Void or Refund
+
+##### Legacy Mutation (Deprecated)
+
+```graphql
+mutation LegacyVoidOrRefundTransaction($input: VoidOrRefundTransactionInput!) {
+  voidOrRefundTransaction(input: $input) {
+    id
+    amount
+    amountVoidedOrRefunded
+    errorMessage
+    surchargeAmount
+    surchargeAmountVoidedOrRefunded
+  }
+}
+```
+
+##### New Mutation
+
+```graphql
+mutation TransactionVoidOrRefund($input: TransactionVoidOrRefundInput!) {
+  transactionVoidOrRefund(input: $input) {
+    status
+    type
+    voidOrRefundTransactions {
+      id
+      amountProcessed
+      amountRefunded
+      errorMessage
+      surchargeAmount
+      surchargeAmountRefunded
+    }
+  }
+}
+```
+
+**⚠️ Important:** The `voidOrRefundTransactions` list is **nullable** and may be empty initially for asynchronous operations.
+
+**Recommended Implementation Pattern:**
+
+1. Check `voidOrRefundRequest.status` first:
+   - `SUCCESS`: Operation completed, check `voidOrRefundTransactions` for results
+   - `AWAITING_RESULT`: Operation is processing, listen for a `transaction.voided` or `transaction.refunded` webhook
+   - `FAILED`: Check `voidOrRefundRequest.errorMessage` for details
+2. Check `voidOrRefundRequest.type` to determine if a `VOID` or `REFUND` was performed
+3. If status is `AWAITING_RESULT`, you'll need to listen to webhooks to get the final result
+
+## Handling Asynchronous Operations
+
+### Webhooks
+
+Implement webhook handlers to receive notifications when operations complete. This provides real-time updates when your refund, void, or void-or-refund operations finish processing.
+
+Relevant webhook events:
+
+- `transaction.refunded` - Triggered when a refund completes
+- `transaction.partially_refunded` - Triggered when a partial refund completes
+- `transaction.voided` - Triggered when a void completes
+
+## Troubleshooting
+
+- **Null transaction lists**: This is expected behavior for asynchronous operations. Always check the request status first.
+- **AWAITING_RESULT status**: The operation is still processing. Use webhooks to get updates.
+- **Error handling**: Always check for `errorMessage` fields in both request and transaction objects.
+
+## Support
+
+If you encounter issues during migration, please contact our engineering team through slack.
