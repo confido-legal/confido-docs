@@ -86,10 +86,10 @@ mutation LegacyVoidTransaction($input: VoidTransactionInput!) {
   voidTransaction(input: $input) {
     id
     amount
-    amountVoided
+    amountRefunded
     errorMessage
     surchargeAmount
-    surchargeAmountVoided
+    surchargeAmountRefunded
   }
 }
 ```
@@ -107,10 +107,10 @@ mutation TransactionVoid($input: TransactionVoidInput!) {
     voidTransactions {
       id
       amountProcessed
-      amountVoided
+      amountRefunded
       errorMessage
       surchargeAmount
-      surchargeAmountVoided
+      surchargeAmountRefunded
     }
   }
 }
@@ -135,10 +135,10 @@ mutation LegacyVoidOrRefundTransaction($input: VoidOrRefundTransactionInput!) {
   voidOrRefundTransaction(input: $input) {
     id
     amount
-    amountVoidedOrRefunded
+    amountRefunded
     errorMessage
     surchargeAmount
-    surchargeAmountVoidedOrRefunded
+    surchargeAmountRefunded
   }
 }
 ```
