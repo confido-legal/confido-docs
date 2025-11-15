@@ -19,7 +19,7 @@ The types of API tokens are:
 To use an API token, add it to your request as the `x-api-key` header.
 
 <Tip>
-  Our API tokens are prefixed with some human readable information. For example,
+  Our API tokens are prefixed with some human-readable information. For example,
   a Partner Token may start with `p_secret_sandbox_`. The `p` indicates it's a
   Partner Token, `secret` indicates it's a secret and should be treated as one,
   and `sandbox` indicates that this is for the sandbox environment.
@@ -61,7 +61,7 @@ f_secret_sandbox_92828393***************assdj3
 
 Payment Session Tokens are generated with the `createPaymentToken` mutation. This request can only be made with a Firm API token.
 
-Payment Session Tokens are a one time use token that should be used to initialize the Confido Legal javascript SDK on your frontend. These tokens are meant to be shared with your frontend code.
+Payment Session Tokens are a one-time-use token that should be used to initialize the Confido Legal JavaScript SDK on your frontend. These tokens are meant to be shared with your frontend code.
 
 ```
 pay_public_sandbox_31319asd**********123alskdow
@@ -73,7 +73,7 @@ For more about Payment Sessions see the [hosted fields](/docs/hosted-fields/over
 
 Onboarding Tokens are generated with the `createOnboardingToken` mutation. This request can only be made with a Firm API token.
 
-Onboarding Tokens are short term tokens that should be used to initialize the Confido Legal javascript SDK on your frontend. These tokens are meant to be shared with your frontend code.
+Onboarding Tokens are short-term tokens that should be used to initialize the Confido Legal JavaScript SDK on your frontend. These tokens are meant to be shared with your frontend code.
 
 ```
 onboarding_public_sandbox_31319asd**********123alskdow

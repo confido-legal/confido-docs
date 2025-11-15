@@ -9,7 +9,7 @@ After a successful payment has been made, there is a short period in which it ca
 | Payment Method | Cutoff Time (Central Time) | _Legacy Cutoff Time (Central Time)_ |
 | -------------- | -------------------------- | ----------------------------------- |
 | Card Payment   | 11:00 PM                   | _10:30 PM_                          |
-| Ach Payment    | 11:00 PM                   | _12:30 PM & 9:00 PM_                |
+| ACH Payment    | 11:00 PM                   | _12:30 PM & 9:00 PM_                |
 
 The `Transaction` object has a `canVoid` boolean that indicates whether or not the transaction can be voided.
 
@@ -24,7 +24,7 @@ Before voiding a transaction, you can use the `transactionVoidDetails` mutation 
 
 ### Refunds
 
-After a successful payment has settled, the transaction can be refunded at any time using the `transactionRefund` mutation. This mutation also contains an optional `amount` input that can be defined to make a partial refund for a specific transaction. An error will be thrown if you attempt to refund more then the original amount of the transaction.
+After a successful payment has settled, the transaction can be refunded at any time using the `transactionRefund` mutation. This mutation also contains an optional `amount` input that can be defined to make a partial refund for a specific transaction. An error will be thrown if you attempt to refund more than the original amount of the transaction.
 
 The `Transaction` object has a `canRefund` boolean that indicates whether or not the transaction can be refunded. This is based on the expected settlement time of the transaction.
 

@@ -20,7 +20,7 @@ During onboarding, the `firm.status` field will go through the following values.
 
 `APP_SUBMITTED` -> The application has been submitted and is going through our review process. From this stage on, the application is locked and cannot be modified.
 
-`APP_IN_REVIEW` -> The application is currently in under review.
+`APP_IN_REVIEW` -> The application is currently under review.
 
 `ACTIVE` -> The Firm has been approved and is ready to start processing payments.
 
@@ -46,7 +46,7 @@ If you have created a Firm Admin user for the Firm, you can log in as that user 
 
 If you are looking to step through the statuses via the GraphQL API, we have created a series of `sandboxOnly` functions for the different steps of the onboarding flow.
 
-`sandboxOnlyFillOnboardingData` -> Fills the application with mock data, including one operating and one trust bank account. This will not overwrite fields of the application that have already been filled out (which can be useful to create a Firm with more then one trust account).
+`sandboxOnlyFillOnboardingData` -> Fills the application with mock data, including one operating and one trust bank account. This will not overwrite fields of the application that have already been filled out (which can be useful to create a Firm with more than one trust account).
 
 `sandboxOnlySubmitOnboardingData` -> Transitions the Firm to the `APP_SUBMITTED` status. Under the hood, this will first call `sandboxOnlyFillOnboardingData` so this function can be called when the Firm status is either `CREATED` or `APP_IN_DRAFT`.
 
@@ -56,7 +56,7 @@ If you are looking to step through the statuses via the GraphQL API, we have cre
 
 ## Production
 
-To onboard firms in production, your team can utilize our [onboarding.js](/onboarding-js/overview) form or have the a Firm user login to the Confido Legal UI to complete the form.
+To onboard firms in production, your team can utilize our [onboarding.js](/onboarding-js/overview) form or have a Firm user log in to the Confido Legal UI to complete the form.
 
 ### Timeline
 

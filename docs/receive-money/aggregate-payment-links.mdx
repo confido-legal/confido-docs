@@ -6,6 +6,6 @@ title: Aggregate Payment Links
 
 Aggregate Payment Links are used in situations where a client has multiple invoices or trust deposit requests outstanding, and you want to allow the client to pay off their entire balance with one payment.
 
-If you are using <a href="https://docs.confidolegal.com/docs/payment-vehicles/payment-links">Payment Links</a>, you likely have a Payment Link for each outstanding invoice or trust request. To generate an Aggregate Payment Link, simply pass through all of the "children" Payment Links, and you will receive an Aggregate Link with an oustanding balance equal to the sum of all the children.
+If you are using <a href="https://docs.confidolegal.com/docs/payment-vehicles/payment-links">Payment Links</a>, you likely have a Payment Link for each outstanding invoice or trust request. To generate an Aggregate Payment Link, simply pass through all of the "children" Payment Links, and you will receive an Aggregate Link with an outstanding balance equal to the sum of all the children.
 
 When a client makes a payment on an Aggregate Link, this will mark all of the children as paid. Note that partial payments are not allowed on Aggregate Payment Links, so there is no need to set any rules about how partial payments should be applied to the children.

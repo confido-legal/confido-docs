@@ -4,7 +4,7 @@ title: Initialize the SDK
 
 ## Load the script
 
-Include the javascript sdk on each page of your site where your payment form exists. It should always be loaded directly with a `script` tag rather than included in a bundle.
+Include the JavaScript SDK on each page of your site where your payment form exists. It should always be loaded directly with a `script` tag rather than included in a bundle.
 
 ```html
 <script src="js.gravity-legal.com/hosted-fields.js" />
@@ -14,7 +14,7 @@ Include the javascript sdk on each page of your site where your payment form exi
 <script src="js.sandbox.gravity-legal.com/hosted-fields.js" />
 ```
 
-The script will use `window.postMessage` to post a message when it has finished loading and is ready for initialization. You can setup a listener to get notified.
+The script will use `window.postMessage` to post a message when it has finished loading and is ready for initialization. You can set up a listener to get notified.
 
 ```typescript
 const myListener = (e) => {
@@ -26,7 +26,7 @@ const myListener = (e) => {
 window.addEventListener("message", myListener);
 ```
 
-Then initialize the sdk with the Payment Token. For a more detailed explanation of the `init()` method, see the [Hosted Fields SDK Reference Docs](/hosted-fields-js/initialize).
+Then initialize the SDK with the Payment Token. For a more detailed explanation of the `init()` method, see the [Hosted Fields SDK Reference Docs](/hosted-fields-js/initialize).
 
 ```javascript
 // Optional CSS styles to customize the

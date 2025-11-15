@@ -9,11 +9,11 @@ Use Connect when your user already has an existing Confido Legal account.
     For users without a Confido Legal account, use [Sign Up Links](/docs/firm-onboarding/sign-up-links) or [Onboarding.js](/onboarding-js/overview).
 </Note>
 
-With Connect, you'll direct users to a unique Connect URL where they will authorize your application. Upon authorization, they will be redirected back to your configured Callback URL with a one time use `code` that can be exchanged for a Firm API Token. You'll then store this token in your database to use in subsequent requests to manage the Firm through the API.
+With Connect, you'll direct users to a unique Connect URL where they will authorize your application. Upon authorization, they will be redirected back to your configured Callback URL with a one-time-use `code` that can be exchanged for a Firm API Token. You'll then store this token in your database to use in subsequent requests to manage the Firm through the API.
 
 Let's get started.
 
-First we need to configure some settings in the Partner portal. Login to the portal and go to Settings > Connect.
+First we need to configure some settings in the Partner portal. Log in to the portal and go to Settings > Connect.
 
 ## Add your logo
 
@@ -23,7 +23,7 @@ It's best if this logo is square and around 200x200 pixels. This logo will show 
 
 Each Partner has their own unique Connect URL. You will direct your users here to start the Connect session. You can pass an optional `state` search parameter to this URL that will be threaded through the process and returned back to you at your Callback URL. This `state` parameter can be any string.
 
-## Setup a Callback URL
+## Set up a Callback URL
 
 The Callback URL is where we will redirect users after they have authorized your application. The GET request will include a couple search parameters. 
 

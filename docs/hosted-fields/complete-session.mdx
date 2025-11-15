@@ -35,7 +35,7 @@ window.confidoHostedFields.submitFields(async (err) => {
 });
 ```
 
-You are now ready to finish the session from your server. You'll need to setup an API endpoint where you can send the token and any additional non-sensitive data that was collected in the form.
+You are now ready to finish the session from your server. You'll need to set up an API endpoint where you can send the token and any additional non-sensitive data that was collected in the form.
 
 ## Payment Session
 
@@ -52,7 +52,7 @@ mutation PaymentSessionComplete($input: PaymentSessionCompleteInput!) {
 }
 ```
 
-Example mutation variables.
+Example mutation variables:
 
 ```typescript
 const variables = {
@@ -84,7 +84,7 @@ mutation CompleteSavePaymentMethod(
 }
 ```
 
-Example variables
+Example variables:
 
 ```typescript
 const variables = {

@@ -2,13 +2,13 @@
 title: Initialize
 ---
 
-You can initialize the fields by calling the `init()` method. Once this method is called, the sdk will emit the `initializing`, `initialized`, and/or the `init_error` [change events](/hosted-fields-js/change-events).
+You can initialize the fields by calling the `init()` method. Once this method is called, the SDK will emit the `initializing`, `initialized`, and/or the `init_error` [change events](/hosted-fields-js/change-events).
 
 ```javascript
 window.confidoHostedFields.init(options: Options): Promise<void>;
 ```
 
-You can call `init()` multiple times in the same context. Each call will trigger a new `initializing`, `initalized`, and/or `init_error` sequence. The fields will also be reloaded each time `init()` is called.
+You can call `init()` multiple times in the same context. Each call will trigger a new `initializing`, `initialized`, and/or `init_error` sequence. The fields will also be reloaded each time `init()` is called.
 
 ## Example
 
