@@ -2,7 +2,7 @@
 title: Change Events
 ---
 
-To provide a great UI/UX experience on your page you will want to know when changes happen within the fields. You can add any number of change listeners to the sdk that will be called when the internal state of the fields change.
+To provide a great UI/UX experience on your page you will want to know when changes happen within the fields. You can add any number of change listeners to the SDK that will be called when the internal state of the fields change.
 
 ```javascript
 const myListener = (e: ChangeEvent) => {
@@ -20,10 +20,10 @@ window.confidoHostedFields.removeChangeListener(myListener);
 | Type                  | Description                                                                                                                                                                                                  |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `bin_change`          | Emitted when the first 6 digits of the card number field changes                                                                                                                                             |
-| `bin_loaded`          | After the bin number changes, the sdk makes a network call to get more information about the current card, including the card type (debit or credit). This event is emitted after this network call returns. |
+| `bin_loaded`          | After the bin number changes, the SDK makes a network call to get more information about the current card, including the card type (debit or credit). This event is emitted after this network call returns. |
 | `field_error_cleared` | Emitted when a field, that was previously in error, is fixed.                                                                                                                                                |
 | `fields_loaded`       | Emitted when all the fields of the active form type are finished loading.                                                                                                                                    |
-| `initializing`        | Emitted immediately following a call to`sdk.init()`                                                                                                                                                          |
+| `initializing`        | Emitted immediately following a call to `sdk.init()`                                                                                                                                                          |
 | `initialized`         | Emitted once initialization is done and successful.                                                                                                                                                          |
 | `init_error`          | Emitted when there's an error with initialization.                                                                                                                                                           |
 

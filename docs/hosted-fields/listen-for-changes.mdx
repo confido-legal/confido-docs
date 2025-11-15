@@ -2,16 +2,16 @@
 title: Listen For Changes
 ---
 
-Before you initialize the SDK you will want to add a change event listener to get notified when the internal state of the field's change.
+Before you initialize the SDK you will want to add a change event listener to get notified when the internal state of the fields changes.
 
 ```javascript
 const myListener = (changeEvent) => {
   console.log(`Change Type: `, changeEvent.type);
   console.log(`Current State: `, changeEvent.state);
-  updateMyUi(changeEvent.state);
+  updateMyUI(changeEvent.state);
 };
 
 window.confidoHostedFields.addChangeListener(myListener);
 ```
 
-For a full list of Change Event types and a complete description of the `state` object, see the [Hosted Fields SDK Reference Docs](/hosted-fields-js/change-events)
+For a full list of Change Event types and a complete description of the `state` object, see the [Hosted Fields SDK Reference Docs](/hosted-fields-js/change-events).

@@ -44,7 +44,7 @@ Here is an example body with a single `transaction.created` payload. Notice how 
 </ParamField>
 
 <ParamField body="eventId" type="string" required>
-  The unique id for this event. This can be used as an idempontent key to ensure
+  The unique id for this event. This can be used as an idempotent key to ensure
   you do not take multiple actions for the same webhook event.
 </ParamField>
 
@@ -58,7 +58,7 @@ You can register endpoints and configure which webhook types you are interested 
 
 Webhook requests will include an HMAC Signature under the `X-SIGNATURE` header. This can be used along with the webhook secret found in the Partner Portal to verify the webhook came from Confido and has not been tampered.
 
-To verify the HMAC Signature, create a `sha512` Hmac with your webhook secret, update it with the webhook payload, and ensure it is equal to the `X-SIGNATURE` header received with the webhook.
+To verify the HMAC Signature, create a `sha512` HMAC with your webhook secret, update it with the webhook payload, and ensure it is equal to the `X-SIGNATURE` header received with the webhook.
 
 Here is some example code written in TypeScript.
 
@@ -81,6 +81,6 @@ export function verifyHmacSignature(
 
 If we do not receive a 200 level response while posting to your endpoint after 5 seconds, the webhook event enters a `failed` state. All webhook events in the `failed` state are retried with the following backoff strategy: 5 min, 20 min, 60 min, 1 day, dead letter.
 
-## Disabling Webhook Urls
+## Disabling Webhook URLs
 
-If a webhook event dead letters, we check if the webhook url has received any successful responses in the last 24 hours. If it has not, we disable the webhook url and it must be re-enabled through our Partner portal.
+If a webhook event dead letters, we check if the webhook URL has received any successful responses in the last 24 hours. If it has not, we disable the webhook URL and it must be re-enabled through our Partner portal.

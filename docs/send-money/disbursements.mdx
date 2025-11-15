@@ -1,4 +1,4 @@
-Securely send money to Clients with Disbursements. Here's the high level overview.
+Securely send money to Clients with Disbursements. Here's the high-level overview.
 
 <Steps>
   <Step title="Create a Disbursement">
@@ -39,7 +39,7 @@ type Disbursement = {
 
 **allowedMethods: DisbursementMethod\[\]**
 
-A list of methods that the client is allowed to use when accepting the disbursement from the payout page. The allowed methods will fallback to the Firm’s defaults unless set specifically on the disbursement.
+A list of methods that the client is allowed to use when accepting the disbursement from the payout page. The allowed methods will fall back to the Firm’s defaults unless set specifically on the disbursement.
 
 `DisbursementMethod.ACH` Slow ACH transaction via Plaid or manually entering account number and routing number.
 
@@ -77,7 +77,7 @@ A flexible JSON object that allows you to store and transfer arbitrary data. Whe
 
 **status**
 
-`DRAFT` The disbursement has been created but has not been approved. At this stage there is no `url` and no funds can transferred.
+`DRAFT` The disbursement has been created but has not been approved. At this stage there is no `url` and no funds can be transferred.
 
 `APPROVED` The disbursement has been approved and is ready for the client to accept. At this status, the disbursement will have a unique `url`.
 
@@ -118,11 +118,11 @@ type DisbursementCreateInput = {
 
 **allowedMethods**
 
-This let’s you specify certain allowed methods for this disbursement only. If let blank, the disbursement will fallback to the Firm’s default methods.
+This lets you specify certain allowed methods for this disbursement only. If left blank, the disbursement will fall back to the Firm’s default methods.
 
 **clientUpsert**
 
-Links an existing client or creates and links a new one to the disbursement. This is useful for checking if the client is already in the system and linking them, or creating a new record if needed. Should not be used with `clientId`
+Links an existing client or creates and links a new one to the disbursement. This is useful for checking if the client is already in the system and linking them, or creating a new record if needed. This should not be used with `clientId`.
 
 **metadata**
 
@@ -154,11 +154,11 @@ type DisbursementUpdateInput = {
 
 ## Approve a Disbursement
 
-Use the `disbursementApprove` mutation to approve a disbursement. If successful, the disbursement will now have a unique url.
+Use the `disbursementApprove` mutation to approve a disbursement. If successful, the disbursement will now have a unique URL.
 
 ## Unapprove a Disbursement
 
-You can use the `disbursementUnapprove` mutation to send the disbursement back to `DRAFT` and invalidate the previous url. When the disbursement is approved again, you will get a new url.
+You can use the `disbursementUnapprove` mutation to send the disbursement back to `DRAFT` and invalidate the previous URL. When the disbursement is approved again, you will get a new URL.
 
 ## Delete a Disbursement
 

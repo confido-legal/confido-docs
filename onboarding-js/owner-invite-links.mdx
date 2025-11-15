@@ -12,14 +12,14 @@ This feature is enabled by default on the onboarding.js form. By default, the ge
 
 You can host your own owner form on your domain. This lets you keep users on your platform instead of directing them to Confido's owner form.
 
-You can use onboarding.js to host an owner form. Very similar to the `renderForm` function, there is also a `renderOwnerForm` function.
+You can use onboarding.js to host an owner form. Similar to the `renderForm` function, there is also a `renderOwnerForm` function.
 
-You pass a url to the `renderForm` function under the `ownerInviteUrl` prop. This url should be a page that you manage and that utilizes the `renderOwnerForm` function. When a user generates a owner invite link the returned url will have a `o_code` query parameter. On your page, you will need to grab this param and pass it into `renderOwnerForm`.
+You pass a URL to the `renderForm` function under the `ownerInviteUrl` prop. This URL should be a page that you manage and that utilizes the `renderOwnerForm` function. When a user generates an owner invite link the returned URL will have a `o_code` query parameter. On your page, you will need to grab this param and pass it into `renderOwnerForm`.
 
-For example, if you passed the following url into `renderForm` under the `ownerInviteUrl` opt:  
+For example, if you passed the following URL into `renderForm` under the `ownerInviteUrl` option:  
 `https://my-app.com/owner-form`
 
-Then the generated url would look something like this:  
+Then the generated URL would look something like this:  
 `https://my-app.com/owner-form?o_code=owner_d97b6badb88240f35c263357b21`
 
 On your page, you would grab the `o_code` and pass it into the `renderOwnerForm` method of `confidoOnboarding`.

@@ -38,13 +38,13 @@
             ]
           },
           {
-            "group": "Recieve Money",
+            "group": "Receive Money",
             "pages": [
-              "docs/recieve-money/payment-links",
-              "docs/recieve-money/aggregate-payment-links",
-              "docs/recieve-money/stored-payment-methods",
-              "docs/recieve-money/subscriptions",
-              "docs/recieve-money/payment-intents"
+              "docs/receive-money/payment-links",
+              "docs/receive-money/aggregate-payment-links",
+              "docs/receive-money/stored-payment-methods",
+              "docs/receive-money/subscriptions",
+              "docs/receive-money/payment-intents"
             ]
           },
           {

@@ -8,19 +8,19 @@ Statements are generated every month to outline metrics for the firm and inform 
 
 All statement data is accessible through our GraphQL API. The Statement object has everything you would need to build a customized statement for the firm branded to your own application.
 
-The `bankAccounts` field on the statement object outlines the fees associated with each of the firms individual bank accounts. If a firm has surcharging enabled, the `surchargeFeesCollected` can be subtracted from the `cardFees` field to determine the firms actual `netFees`. The fees are broken up in this manner because surcharging fees are deposited into the firm's bank account at the time of the payment and then taken out at the end of the month.
+The `bankAccounts` field on the statement object outlines the fees associated with each of the firm's individual bank accounts. If a firm has surcharging enabled, the `surchargeFeesCollected` can be subtracted from the `cardFees` field to determine the firm's actual `netFees`. The fees are broken up in this manner because surcharging fees are deposited into the firm's bank account at the time of the payment and then taken out at the end of the month.
 
-The `debits` field on the statement object outlines the debits that will be taken out of the firms fee bank account.
+The `debits` field on the statement object outlines the debits that will be taken out of the firm's fee bank account.
 
-The `additionalCredits` and `additionalDebits` fields are catch all locations for any additional changes that occured (fee waivers, chargeback reversals, etc).
+The `additionalCredits` and `additionalDebits` fields are catch-all locations for any additional changes that occurred (fee waivers, chargeback reversals, etc.).
 
 ### Utilizing the Confido Legal PDF
 
-You can also query the GraphQL API for the `statement.pdfUrl` field. This is a short term url that can be used to either download the pdf or display the statement in a UI.
+You can also query the GraphQL API for the `statement.pdfUrl` field. This is a short-term URL that can be used to either download the PDF or display the statement in a UI.
 
 <div className="italic text-orange-400">
-    Warning: The pdfUrl should not be sent out through an email because it is a short lived link. If you would like to
-    send the pdf through an email, the pdf should be downloaded with the pdfUrl and added as an attachment to the email.
+    Warning: The `pdfUrl` should not be sent out through an email because it is a short-lived link. If you would like to
+    send the PDF through an email, the PDF should be downloaded with the `pdfUrl` and added as an attachment to the email.
 </div>
 
 ### Webhooks
