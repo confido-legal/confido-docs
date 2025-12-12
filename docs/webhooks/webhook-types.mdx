@@ -59,6 +59,24 @@ Sent when a Firm is updated. This includes when the Firm's status changes.
 }
 ```
 
+## refund_request.completed
+
+Sent when an refund request reachs its terminal state.
+
+```json
+{
+  "data": {
+    "refundRequest": {
+      "id": "string"
+      "status": "string"
+    },
+  },
+  "type": "refund_request.completed",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
+}
+```
+
 ## statement.created
 
 Emitted when a monthly statement has been created for a Firm.
@@ -291,6 +309,24 @@ Sent when an ACH Transaction is returned.
     }
   },
   "type": "transaction.ach_returned",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
+}
+```
+
+## void_request.completed
+
+Sent when an void request reachs its terminal state.
+
+```json
+{
+  "data": {
+    "voidRequest": {
+      "id": "string"
+      "status": "string"
+    },
+  },
+  "type": "void_request.completed",
   "firmId": "<firm_id>",
   "eventId": "<event_id>"
 }
