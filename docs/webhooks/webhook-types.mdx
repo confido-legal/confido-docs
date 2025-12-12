@@ -166,38 +166,52 @@ Emitted when a Stored Payment Method is updated.
 
 Sent when a new Transaction is created. You can find the full data typing in our [API Sandbox](https://api.sandbox.gravity-legal.com/) under root > Query > transaction.
 
-```ts
-{transaction: {
-  id: string;
-  achReturnCode: string | null;
-  achReturnReason: string | null;
-  aggregatePaymentLink: { id: string } | null;
-  amountProcessed: number;
-  amountRefunded: number;
-  bankAccount: { id: string };
-  cardBrand: string | null;
-  client: { id: string } | null;
-  createdOn: Date;
-  disbursement: { id: string } | null;
-  disbursementAmounts: DisbursementAmounts | null;
-  errorMessage: string | null;
-  firm: { id: string };
-  lastFour: string | null;
-  matter: { id: string } | null;
-  payerEmail: string | null;
-  payerName: string | null;
-  payerNotes: string | null;
-  paymentMethod: TransactionPaymentMethod;
-  payment: { id: string } | null;
-  paymentLink: { id: string } | null;
-  settledOn: Date | null;
-  standingLink: { id: string } | null;
-  status_v2: PaymentTxnStatus2;
-  storedPaymentMethod: { id: string } | null;
-  subscription: { id: string } | null;
-  type: PaymentTxnType;
-  }
-};
+```json
+{
+  "data": {
+    "transaction": {
+      "id": "string"
+      "achReturnCode": "string",
+      "achReturnReason": "string",
+      "aggregatePaymentLink": { "id": "string" },
+      "amountProcessed": "int",
+      "amountRefunded": "int",
+      "bankAccount": { "id": "string" },
+      "cardBrand": "string",
+      "client": { "id": "string" },
+      "createdOn": "Date",
+      "disbursement": { "id": "string" },
+      "disbursementAmounts": {
+        "fee": "int",
+        "fullAmount": "int",
+        "netDeposit": "int"
+      },
+      "errorMessage": "string",
+      "firm": {
+        "id": "string",
+        "name": "string"
+      },
+      "lastFour": "string",
+      "matter": { "id": "string" },
+      "payerEmail": "string",
+      "payerName": "string",
+      "payerNotes": "string",
+      "paymentMethod": "string",
+      "payment": { "id": "string" },
+      "paymentLink": { "id": "string" },
+      "payRequest": { "externalId": "string" },
+      "settledOn": "Date",
+      "standingLink": { "id": "string" },
+      "status_v2": "TransactionStatus",
+      "storedPaymentMethod": { "id": "string" },
+      "subscription": { "id": "string" },
+      "type": "string"
+    },
+  },
+  "type": "transaction.funds_in_transit",
+  "firmId": "<firm_id>",
+  "eventId": "<event_id>"
+}
 ```
 
 ## transaction.funds_in_transit
